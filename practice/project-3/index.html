@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валидация логина и пароля</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sign in</h1>
+        <div>
+            <input type="text" id="username" placeholder="Введите логин">
+            <div id="username-error" class="error"></div>
+        </div>
+        <div>
+            <input type="password" id="password" placeholder="Введите пароль">
+            <div id="password-error" class="error"></div>
+        </div>
+        <button id="login-button">Войти</button>
+        <div id="unsuccess-message" class="hidden">
+            <h2>Логин или пароль не верный</h2>
+        </div>
+        <div id="welcome-message" class="hidden">
+            <h3>Привет, <span id="welcome-username"></span>, давно не виделись!</h3>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Sign up</h1>
+        <div>
+            <input type="text" id="username-sign_up" placeholder="Введите логин">
+            <div id="username-error-sign_up" class="error"></div>
+        </div>
+        <div>
+            <input type="password" id="password-sign_up" placeholder="Введите пароль">
+            <div id="password-error-sign_up" class="error"></div>
+        </div>
+        <div>
+            <input type="password" id="confirm-password-sign_up" placeholder="Повторите пароль">
+            <div id="confirm-password-error-sign_up" class="error"></div>
+        </div>
+        <button id="register-button-sign_up">Зарегистрироваться</button>
+        <div id="success-message-sign_up" class="hidden">
+            <h3>Регистрация прошла успешно!</h3>
+        </div>
+        <div id="register-filed-sign_up" class="hidden">
+            <h2></h2>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
