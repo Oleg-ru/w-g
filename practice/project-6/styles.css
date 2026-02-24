@@ -1,0 +1,25 @@
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.product {
+    width: 45%;
+    border: 1px solid black;
+}
+
+.product-data {
+    padding: 15px;
+}
+
+.title {
+    background-color: bisque;
+    padding: 10px 3px;
+}

@@ -41,39 +41,32 @@ const getSale = (products) => {
         return {...product, price: newPrice}
     })
 };
+
 const render = (products) => {
     const containerEl = document.createElement("div");
     rootEl.append(containerEl);
 
-    const addInfoElement= (DOMElement, newText, className) => {
-        DOMElement.classList.add(className);
-        DOMElement.innerText = newText;
-    };
+    const resulDOM = products.map(({name, brand, img, price, color, description, weight}) => {
 
-    return products.map(product => {
-        const productEl = document.createElement("div"); //Карточка
-        const titleEl = document.createElement("p"); //Заголовок
-        const brandEl = document.createElement("p"); //Бренд
-        const brandSpanEl = document.createElement("span"); //Бренд значение
-        const imgEl = document.createElement("p"); //Картинка товара
-        const priceEl = document.createElement("p"); //Цена
-        const priceSpanEl = document.createElement("span"); //Сама цена
-        const oldPriceEl = document.createElement("p"); //Старая цена значение
-        const oldPriceSpanEl = document.createElement("span"); //Старая цена значение
-        const colorEl = document.createElement("p"); //Цвет
-        const colorSpanEl = document.createElement("span"); //Цвет значение
-        const descriptionEl = document.createElement("p"); //Описание
-        const descriptionSpanEl = document.createElement("span"); //Описание значение
-        const weightEl = document.createElement("p"); //Вес
-        const weightSpanEl = document.createElement("span"); //Вес значение
-
-
-        productEl.classList.add("product");
-
-        return
+        return `
+    <div class="product">
+        <div class="title">${name}</div>
+        <div class="product-data">
+            <p class="brend">Производитель: <span class="brend-desk">${brand}</span></p>
+            <img src="${img}" alt="product">
+            <p class="price">Цена: <span class="price-desk">${price}</span></p>
+            <p class="oldPrice">Старая цена: <span class="oldPrice-desc">${0}</span></p>
+            <p class="color">Цвет: <span class="color-desc">${color}</span></p>
+            <p class="description">Описание: <span class="description-desc">${description}</span></p>
+            <p class="weight">Вес: <span class="weight-desc">${weight}</span></p>
+        </div>
+    </div>
+`
     })
+    rootEl.innerHTML = resulDOM.join("")
 }
-render()
+
 const products = sortData(parseData(products1, products2), "велосипеды", "аксессуары")
+render(products)
 console.log(getSale(products))
 
