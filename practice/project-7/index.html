@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="main-container">
+    <div class="title-form-container">
+        <h1 class="title">Форма регистрации</h1>
+        <div class="form-container">
+            <form class="form">
+                <input type="text" class="name" name="name" placeholder="Имя" required>
+                <input type="email" class="email" name="email" placeholder="Почта">
+                <input type="password" class="password" name="password" placeholder="Пароль">
+                <div class="password-error">Пароль должен состоять из латинских символов и цифр, а так же быть не менее 8 символов</div>
+                <input type="password" class="repeat-password" placeholder="Повторить пароль">
+                <div class="repeat-password-error">Пароли не совпадают</div>
+                <select name="date-end-edu" id="date-end-edu" class="select">
+                    <option value="" disabled selected>Дата окончания учубного заведения</option>
+                </select>
+                <button type="submit">Отправить</button>
+                <button type="reset">Очистить форму</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

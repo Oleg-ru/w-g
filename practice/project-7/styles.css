@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "sans-serif";
+}
+
+body {
+    background-color: #353535;
+}
+
+input {
+
+}
+
+button {
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s ease, scale 0.1s ease-in-out;
+}
+
+button:hover {
+    background-color: rgba(228, 225, 225, 0.71);
+}
+
+button:active {
+    scale: 0.97;
+}
+
+#date-end-edu {
+
+}
+
+input, button, #date-end-edu {
+    width: 80%;
+    height: 40px;
+    padding: 5px;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.42);
+    box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.78);
+    font-size: 1.05rem;
+}
+
+input, #date-end-edu {
+    background-color: rgba(204, 204, 204, 0.38);
+}
+
+input:focus, #date-end-edu:focus {
+    background-color: white;
+}
+
+.main-container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.title-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.78);
+    background-color: white;
+
+}
+
+.form {
+    width: 40vw;
+    margin: 20px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    padding-top: 30px;
+}
+
+.password-error {
+    width: 80%;
+    color: red;
+    display: none;
+}
+
+.password-error::before {
+    content: 'Ошибка: ';
+}
+
+.repeat-password-error {
+    width: 80%;
+    color: red;
+    display: none;
+}
