@@ -3,6 +3,8 @@ import './HomePage.css'
 import programmer from "../assets/programmer.jpg"
 import Button from "../components/Button/Button.jsx";
 import UserList from "../components/UserList/UserList.jsx";
+import TextComponentC from "../components/TextComponentC/TextComponentC.jsx";
+import TaskList from "../components/TaskList/TaskList.jsx";
 
 function HomePage(props) {
     return (
@@ -15,6 +17,8 @@ function HomePage(props) {
             <Button name={'Первая кнопка'}/>
             <UserList />
             <img src="images/laptop.jpg" alt=""/>
+            <TextComponentC />
+            <TaskList />
         </div>
     );
 }
