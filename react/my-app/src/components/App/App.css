@@ -1,5 +1,5 @@
-body {
-  background-color: #353535;
-  color: white;
-  font-family: 'sans-serif';
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

@@ -1,18 +1,18 @@
-import {useState} from 'react'
 import './App.css'
-import MyName from "../MyName/MyName.jsx";
-import Email from "../Email/Email.jsx";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
+import HomePage from "../../pages/HomePage.jsx";
 
 function App() {
-    const [count, setCount] = useState(0)
 
     return (
-        <div>
-            <h1>Хеллой бой</h1>
-            <p>Я твой друг React</p>
-            <MyName />
-            <Email />
-        </div>
+        <>
+            <Header />
+            <main className='app'>
+                <HomePage />
+            </main>
+            <Footer />
+        </>
     )
 }
 
