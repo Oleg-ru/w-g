@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './HomePage.css'
-import Greeting from "../components/Greeting/Greeting.jsx";
+import ControlledForm from "../components/ControlledForm/ControlledForm.jsx";
+import UncontrolledForm from "../components/UncontrolledForm/UncontrolledForm.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <Greeting isLoggedIn={true}/>
+            <ControlledForm />
+            <p>Не контролируемый:</p>
+            <UncontrolledForm />
         </div>
     );
 }

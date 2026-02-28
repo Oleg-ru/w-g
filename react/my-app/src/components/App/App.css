@@ -4,6 +4,10 @@
   min-height: 100vh;
 }
 
+input {
+  color: black;
+}
+
 button {
   color: black;
   padding: 5px;
