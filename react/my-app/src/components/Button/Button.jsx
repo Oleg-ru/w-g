@@ -2,12 +2,15 @@ import React from 'react';
 import './Button.css'
 
 function Button(props) {
-    function handleClick(e) {
-        alert(`Кнопка с текстом "${e.target.textContent}" была нажата`)
-    }
+
+    const {
+        label,
+        name,
+        handleClick
+    } = props;
 
     return (
-        <button className="button" onClick={handleClick}>{props.name}</button>
+        <button className="button" onClick={handleClick}>{name}</button>
     );
 }
 
