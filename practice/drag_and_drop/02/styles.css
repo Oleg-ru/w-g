@@ -1,0 +1,34 @@
+.title {
+    text-align: center;
+}
+
+#drop-zone-1, #drop-zone-2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+    height: 100px;
+    margin-bottom: 50px;
+    padding: 0 10px;
+    border: 2px dashed;
+    border-radius: 10px;
+}
+
+.variants {
+    width: 80%;
+    padding: 40px 10px;
+    display: flex;
+    gap: 10px;
+    font-size: 1.1rem;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+[id^="drag-"] {
+    width: max-content;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: lawngreen;
+}
