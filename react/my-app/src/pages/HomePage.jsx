@@ -3,14 +3,15 @@ import './HomePage.css'
 
 function HomePage(props) {
 
-    const [clicks, setClicks] = useState(0);
-
-    const handleClick = () => {
-        setClicks(clicks + 1);
+    const [text, setText] = useState(null);
+    const handleOnChange = (e) => {
+        setText(e.target.value)
     };
+
     return (
         <div className="homePage">
-            <button onClick={handleClick}>Счетчик: {clicks}</button>
+            <input onChange={handleOnChange} />
+            <div>Текст: {text}</div>
         </div>
     );
 }
