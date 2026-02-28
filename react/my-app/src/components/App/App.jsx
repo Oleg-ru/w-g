@@ -4,6 +4,9 @@ import Footer from "../Footer/Footer.jsx";
 import HomePage from "../../pages/HomePage.jsx";
 import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import {useState} from "react";
+import CounterC from "../CounterC/CounterC.jsx";
+import UserProfile from "../UserProfile/UserProfile.jsx";
+import ParentComponentC from "../ParentComponent/ParentComponentC.jsx";
 
 function App() {
     const [isDarkMode, setIsDarkMode] = useState(true)
@@ -13,7 +16,9 @@ function App() {
             <Header />
             <main className='app'>
                 <HomePage />
-                <ThemeToggle isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
+                <CounterC />
+                <UserProfile />
+                <ParentComponentC />
             </main>
             <Footer />
         </>
