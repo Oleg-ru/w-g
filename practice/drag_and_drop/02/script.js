@@ -48,9 +48,19 @@ document.getElementById("check-answers").addEventListener("click", () => {
     let score = 0;
 
     const correctAnswers = {
-        "zone-1": "drag-1",
-        "zone-2": "drag-2",
+        "drop-zone-1": "drag-1",
+        "drop-zone-2": "drag-2",
     };
 
-
+    dropZones.forEach(zone => {
+        const zoneId = zone.id;
+        const dropItem = zone.querySelector('[id^="drag-"]');
+        console.log(zoneId)
+        console.log(dropItem)
+        if (dropItem && dropItem.id === correctAnswers[zoneId]) {
+            score++;
+        }
+    });
+    const resultText = score === 2 ? "Все ответы правильные" : `Правильных ответов: ${score}`;
+    document.getElementById('result').textContent = resultText;
 })
