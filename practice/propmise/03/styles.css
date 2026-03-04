@@ -141,6 +141,10 @@ body {
   color: #333;
 }
 
+.task-completed {
+  text-decoration: line-through;
+}
+
 /* Чекбокс */
 .todo input[type="checkbox"] {
   margin-right: 12px;
