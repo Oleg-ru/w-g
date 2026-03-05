@@ -20,7 +20,12 @@ export async function loadData() {
         renderData(todos)
     } catch (error) {
         console.error("Ошибка: " + error.message);
-        showError('Не удалось получить данные');
+
+        if (error.message === 'Задач нет') {
+            showError('Задач нет');
+        } else {
+            showError('Не удалось получить данные');
+        }
     } finally {
         hideLoader();
     }
@@ -252,10 +257,14 @@ async function updateTaskOrder() {
 }
 
 function showError(message) {
+
+    const icon = message === 'Задач нет' ? 'info' : 'error';
+    const title = message === 'Задач нет' ? 'Задач еще нет' : 'Ошибка!';
+
     Swal.fire({
-        title: 'Ошибка!',
+        title,
         text: message,
-        icon: 'error',
+        icon,
         showConfirmButton: true
     })
 }
