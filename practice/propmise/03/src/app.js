@@ -1,10 +1,12 @@
-import {getTodos} from "./api/getTodoAPI.js";
-import {toggleTodoStatus} from "./api/changeStatusTodoAPI.js";
-import {deleteTask} from "./api/deleteTodoAPI.js";
-import {updateTaskText} from "./api/setNewTextTodoAPI.js";
-import {addTask} from "./api/addNewTaskTodoAPI.js";
-import {updateTaskOrderOnServer} from "./api/updateTasksOrderAPI.js";
-import {deleteCompletedTodos} from "./api/deleteCompletedTodoAPI.js";
+import {
+    getTodos,
+    toggleTodoStatus,
+    deleteTask,
+    updateTaskText,
+    addTask,
+    updateTaskOrderOnServer,
+    deleteCompletedTodos
+} from "./api/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -37,9 +39,15 @@ function renderData(tasks) {
     //Если есть хоть 1 выполненная задача показываем кнопку удаления выполненных задач
     const hasCompletedTasks = tasks.some(task => task.completed);
     deleteCompletedButton.style.display = hasCompletedTasks ? 'block' : 'none';
-    
+
     tasks.forEach(task => {
-        const date = new Date(task.createdAt).toLocaleString("ru-RU", {year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"});
+        const date = new Date(task.createdAt).toLocaleString("ru-RU", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
 
         const todoEl = document.createElement('div');
         todoEl.className = 'todo';
@@ -83,7 +91,7 @@ function renderData(tasks) {
         const imgDeleteEl = document.createElement('img');
         imgDeleteEl.alt = 'Удалить';
         imgDeleteEl.title = 'Удалить';
-        imgDeleteEl.src = './images/icon-delete.png';
+        imgDeleteEl.src = './assets/icons/icon-delete.png';
         deleteButtonEl.appendChild(imgDeleteEl);
 
         //Кнопка изменить
@@ -101,7 +109,7 @@ function renderData(tasks) {
         const imgSetNewTextEl = document.createElement('img');
         imgSetNewTextEl.alt = 'Изменить';
         imgSetNewTextEl.title = 'Изменить';
-        imgSetNewTextEl.src = './images/icon-update.png';
+        imgSetNewTextEl.src = './assets/icons/icon-update.png';
         setNewTextButtonEl.appendChild(imgSetNewTextEl);
 
         //drag&drop
@@ -186,7 +194,7 @@ function showLoader() {
     overlay.style.display = 'flex'
 }
 
- function hideLoader() {
+function hideLoader() {
     overlay.style.display = 'none'
 }
 

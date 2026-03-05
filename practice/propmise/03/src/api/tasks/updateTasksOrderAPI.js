@@ -1,4 +1,4 @@
-import {BASE_URL} from "./getTodoAPI.js";
+import {BASE_URL} from "../host.js";
 
 export async function updateTaskOrderOnServer(taskId, taskOrder) {
     try {
