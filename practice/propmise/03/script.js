@@ -19,7 +19,8 @@ export async function loadData() {
         const todos = await getTodos();
         renderData(todos)
     } catch (error) {
-        console.error("Ошибка: " + error.message)
+        console.error("Ошибка: " + error.message);
+        showError('Не удалось получить данные');
     } finally {
         hideLoader();
     }
@@ -48,7 +49,8 @@ function renderData(tasks) {
                 await toggleTodoStatus(task.id, task.completed);
                 await loadData();
             } catch (error) {
-                console.error(error.message)
+                console.error(error.message);
+                showError('Не удалось изменить статус задачи');
             }
         });
 
@@ -69,7 +71,8 @@ function renderData(tasks) {
                 await deleteTask(task.id)
                 await loadData();
             } catch (error) {
-                console.error(error.message)
+                console.error(error.message);
+                showError('Не удалось удалить задачу');
             }
         });
         const imgDeleteEl = document.createElement('img');
@@ -86,7 +89,8 @@ function renderData(tasks) {
                 await setNewTextTask(task.id, task.text)
                 await loadData();
             } catch (error) {
-                console.error(error.message)
+                console.error(error.message);
+                showError('Не удалось изменить текст задачи');
             }
         });
         const imgSetNewTextEl = document.createElement('img');
@@ -136,15 +140,25 @@ async function addNewTask() {
 }
 
 deleteCompletedButton.addEventListener('click', async () => {
-    const isConfirmedDeleted = confirm('Удалим все выполненные задача. Согласны?');
+    const {isConfirmed} = await Swal.fire({
+        title: "Вы уверены?",
+        text: "Удалим все выполненные задача",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Да, удалить их",
+        cancelButtonText: "Отменить"
+    });
 
-    if (!isConfirmedDeleted) return;
+    if (!isConfirmed) return;
 
     try {
         await deleteCompletedTodos(container);
         await loadData();
     } catch (error) {
         console.error(error.message);
+        showError('Не удалось удалить выполненные задачи');
     }
 })
 
@@ -162,7 +176,8 @@ addButton.addEventListener('click', async () => {
         await addNewTask();
         await loadData();
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
+        showError('Не удалось добавить новую задачу');
     } finally {
         hideLoader();
     }
@@ -174,7 +189,8 @@ taskInput.addEventListener('keydown', async (event) => {
             await addNewTask();
             await loadData();
         } catch (error) {
-            console.error(error.message)
+            console.error(error.message);
+            showError('Не удалось добавить новую задачу');
         } finally {
             hideLoader();
         }
@@ -229,7 +245,17 @@ async function updateTaskOrder() {
         return true;
     } catch (error) {
         console.error(error.message);
+        showError('Не удалось поменять порядок задач');
     } finally {
         hideLoader();
     }
+}
+
+function showError(message) {
+    Swal.fire({
+        title: 'Ошибка!',
+        text: message,
+        icon: 'error',
+        showConfirmButton: true
+    })
 }
