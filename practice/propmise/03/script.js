@@ -3,12 +3,15 @@ import {toggleTodoStatus} from "./api/changeStatusTodoAPI.js";
 import {deleteTask} from "./api/deleteTodoAPI.js";
 import {updateTaskText} from "./api/setNewTextTodoAPI.js";
 import {addTask} from "./api/addNewTaskTodoAPI.js";
+import {updateTaskOrderOnServer} from "./api/updateTasksOrderAPI.js";
+import {deleteCompletedTodos} from "./api/deleteCompletedTodoAPI.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
 const downloadButton = document.querySelector(".button-download");
 const overlay = document.getElementById("overlay");
+const deleteCompletedButton = document.getElementById('delete-completed-button');
 
 export async function loadData() {
     try {
@@ -24,11 +27,17 @@ export async function loadData() {
 
 function renderData(tasks) {
     container.innerHTML = '';
+
+    //Если есть хоть 1 выполненная задача показываем кнопку удаления выполненных задач
+    const hasCompletedTasks = tasks.some(task => task.completed);
+    deleteCompletedButton.style.display = hasCompletedTasks ? 'block' : 'none';
+    
     tasks.forEach(task => {
         const date = new Date(task.createdAt).toLocaleString("ru-RU", {year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"});
 
         const todoEl = document.createElement('div');
         todoEl.className = 'todo';
+        todoEl.setAttribute('data-id', task.id);
 
         //Чекбокс таска
         const inputEl = document.createElement('input');
@@ -86,6 +95,9 @@ function renderData(tasks) {
         imgSetNewTextEl.src = './images/icon-update.png';
         setNewTextButtonEl.appendChild(imgSetNewTextEl);
 
+        //drag&drop
+        addDragAndDropListener(todoEl, task);
+
         //Монтируем в контейнер таску
         todoEl.append(inputEl, taskTextEl, createdDateTaskEl, deleteButtonEl, setNewTextButtonEl);
         container.append(todoEl);
@@ -123,6 +135,19 @@ async function addNewTask() {
     taskInput.value = '';
 }
 
+deleteCompletedButton.addEventListener('click', async () => {
+    const isConfirmedDeleted = confirm('Удалим все выполненные задача. Согласны?');
+
+    if (!isConfirmedDeleted) return;
+
+    try {
+        await deleteCompletedTodos(container);
+        await loadData();
+    } catch (error) {
+        console.error(error.message);
+    }
+})
+
 function showLoader() {
     overlay.style.display = 'flex'
 }
@@ -133,21 +158,78 @@ function showLoader() {
 
 addButton.addEventListener('click', async () => {
     try {
+        showLoader()
         await addNewTask();
         await loadData();
     } catch (error) {
         console.error(error.message)
+    } finally {
+        hideLoader();
     }
 });
 taskInput.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
         try {
+            showLoader()
             await addNewTask();
             await loadData();
         } catch (error) {
             console.error(error.message)
+        } finally {
+            hideLoader();
         }
     }
-})
+});
+downloadButton.addEventListener('click', loadData);
 
-downloadButton.addEventListener('click', loadData)
+//Drag&Drop
+function addDragAndDropListener(todoElement, todo) {
+    todoElement.draggable = true;
+
+    todoElement.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData('text/plain', todo.id);
+        event.currentTarget.classList.add('dragging');
+    });
+
+    todoElement.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        const draggable = document.querySelector('.dragging');
+        const overElement = event.currentTarget;
+        if (overElement !== draggable) {
+            const rect = overElement.getBoundingClientRect();
+            const offset = event.clientY - rect.top;
+            if (offset < rect.height / 2) {
+                container.insertBefore(draggable, overElement)
+            } else {
+                container.insertBefore(draggable, overElement.nextSibling)
+            }
+        }
+    });
+
+    todoElement.addEventListener('dragend', (event) => {
+        event.currentTarget.classList.remove('dragging');
+        updateTaskOrder()
+    });
+}
+
+async function updateTaskOrder() {
+    const tasks = [...container.querySelectorAll('.todo')];
+    const updatedOrder = tasks.map((task, index) => {
+        return {
+            id: task.getAttribute('data-id'),
+            order: index + 1,
+        }
+    });
+
+    try {
+        showLoader();
+        for (const task of updatedOrder) {
+            await updateTaskOrderOnServer(task.id, task.order);
+        }
+        return true;
+    } catch (error) {
+        console.error(error.message);
+    } finally {
+        hideLoader();
+    }
+}

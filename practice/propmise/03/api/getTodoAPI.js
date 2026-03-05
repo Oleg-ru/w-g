@@ -9,7 +9,9 @@ export async function getTodos() {
         if (!response.ok) {
             throw new Error('Задачи не получены. Статус ' + response.status);
         }
-        return await response.json();
+        const data = await response.json();
+        data.sort((a, b) => a.order - b.order);
+        return data
     } catch (error) {
         throw error; // проброс ошибки выше
     }

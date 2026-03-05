@@ -93,7 +93,7 @@ body {
 }
 
 /* Кнопки */
-.button-download {
+.button-download, #delete-completed-button {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
@@ -104,12 +104,23 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+#delete-completed-button {
+  background-color: #cc3026;
+  display: none;
+}
+
+#delete-completed-button:hover {
+  background-color: #9f1b13;
+  transform: translateY(-2px);
+}
+
+
 .button-download:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
 
-.button-download:active {
+.button-download:active, #delete-completed-button:active {
   transform: translateY(0);
 }
 
@@ -165,4 +176,16 @@ body {
 
 .button-function:hover {
   transform: scale(1.1);
+}
+
+/*Drag&Drop*/
+
+.todo.dragging {
+  opacity: 0.4;
+  background-color: #dddddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.todo {
+  transition: all 0.3s;
 }
