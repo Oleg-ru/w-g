@@ -3,10 +3,9 @@ import {
     toggleTodoStatus,
     deleteTask,
     updateTaskText,
-    addTask,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, addNewTask} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -148,27 +147,10 @@ async function setNewTextTask(taskId, taskText) {
     }
 }
 
-async function addNewTask() {
-    const newTextTask = taskInput.value.trim();
-
-    if (!newTextTask) {
-        alert('Для добавления новой задачи нужно указать текст!');
-        return;
-    }
-
-    const newTask = {
-        text: newTextTask,
-        createdAt: Date.now(),
-        completed: false,
-    };
-
-    await addTask(newTask);
-    taskInput.value = '';
-}
 addButton.addEventListener('click', async () => {
     try {
         showLoader()
-        await addNewTask();
+        await addNewTask(taskInput);
         await loadData();
     } catch (error) {
         console.error(error.message);
@@ -181,7 +163,7 @@ taskInput.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
         try {
             showLoader()
-            await addNewTask();
+            await addNewTask(taskInput);
             await loadData();
         } catch (error) {
             console.error(error.message);
@@ -192,4 +174,4 @@ taskInput.addEventListener('keydown', async (event) => {
     }
 });
 downloadButton.addEventListener('click', loadData);
-initDeleteCompleted(container)
+initDeleteCompleted(container);
