@@ -4,17 +4,15 @@ import {
     deleteTask,
     updateTaskText,
     addTask,
-    updateTaskOrderOnServer,
-    deleteCompletedTodos
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop} from "./components";
+import {initDragAndDrop, initDeleteCompleted} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
 const downloadButton = document.querySelector(".button-download");
-const deleteCompletedButton = document.getElementById('delete-completed-button');
+export const deleteCompletedButton = document.getElementById('delete-completed-button');
 
 export async function loadData() {
     try {
@@ -167,30 +165,6 @@ async function addNewTask() {
     await addTask(newTask);
     taskInput.value = '';
 }
-
-deleteCompletedButton.addEventListener('click', async () => {
-    const {isConfirmed} = await Swal.fire({
-        title: "Вы уверены?",
-        text: "Удалим все выполненные задача",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Да, удалить их",
-        cancelButtonText: "Отменить"
-    });
-
-    if (!isConfirmed) return;
-
-    try {
-        await deleteCompletedTodos(container);
-        await loadData();
-    } catch (error) {
-        console.error(error.message);
-        showError('Не удалось удалить выполненные задачи');
-    }
-})
-
 addButton.addEventListener('click', async () => {
     try {
         showLoader()
@@ -218,3 +192,4 @@ taskInput.addEventListener('keydown', async (event) => {
     }
 });
 downloadButton.addEventListener('click', loadData);
+initDeleteCompleted(container)
