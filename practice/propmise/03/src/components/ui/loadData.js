@@ -1,0 +1,22 @@
+import {hideLoader, showError, showLoader} from "../../utils/helpers.js";
+import {renderData} from "./renderData.js";
+import {getTodos} from "../../api/index.js";
+import {container, deleteCompletedButton, downloadButton} from '../../app.js'
+
+export async function loadData() {
+    try {
+        showLoader()
+        const todos = await getTodos();
+        renderData(todos, container, deleteCompletedButton, downloadButton);
+    } catch (error) {
+        console.error("Ошибка: " + error.message);
+
+        if (error.message === 'Задач нет') {
+            showError('Задач нет');
+        } else {
+            showError('Не удалось получить данные');
+        }
+    } finally {
+        hideLoader();
+    }
+}

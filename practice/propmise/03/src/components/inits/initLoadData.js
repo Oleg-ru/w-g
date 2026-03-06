@@ -1,4 +1,4 @@
-import {loadData} from "../../app.js";
+import {loadData} from "../index.js";
 
 export function initLoadData(downloadButton) {
     downloadButton.addEventListener('click', loadData);

@@ -1,5 +1,5 @@
 import {deleteTask} from "../../api/index.js";
-import {loadData} from "../../app.js";
+import {loadData} from "../index.js";
 import {showError} from "../../utils/helpers.js";
 
 export function initDeleteTask(deleteButtonEl, task) {

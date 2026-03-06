@@ -1,4 +1,4 @@
-import {loadData} from "../../app.js";
+import {loadData} from "../index.js";
 import {hideLoader, showError, showLoader} from "../../utils/helpers.js";
 import {addNewTask} from "../index.js";
 

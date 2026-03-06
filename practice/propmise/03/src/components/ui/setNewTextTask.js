@@ -1,4 +1,4 @@
-import {loadData} from "../../app.js";
+import {loadData} from "../index.js";
 import {updateTaskText} from "../../api/index.js";
 
 export async function setNewTextTask(taskId, taskText) {
