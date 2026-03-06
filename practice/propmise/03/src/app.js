@@ -5,7 +5,7 @@ import {
     updateTaskText,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, addNewTask} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -146,32 +146,6 @@ async function setNewTextTask(taskId, taskText) {
         }
     }
 }
-
-addButton.addEventListener('click', async () => {
-    try {
-        showLoader()
-        await addNewTask(taskInput);
-        await loadData();
-    } catch (error) {
-        console.error(error.message);
-        showError('Не удалось добавить новую задачу');
-    } finally {
-        hideLoader();
-    }
-});
-taskInput.addEventListener('keydown', async (event) => {
-    if (event.key === 'Enter') {
-        try {
-            showLoader()
-            await addNewTask(taskInput);
-            await loadData();
-        } catch (error) {
-            console.error(error.message);
-            showError('Не удалось добавить новую задачу');
-        } finally {
-            hideLoader();
-        }
-    }
-});
 downloadButton.addEventListener('click', loadData);
 initDeleteCompleted(container);
+initAddTask(addButton, taskInput)
