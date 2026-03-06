@@ -7,6 +7,7 @@ import {
     updateTaskOrderOnServer,
     deleteCompletedTodos
 } from "./api/index.js";
+import {hideLoader, showError, showLoader} from "./utils/helpers.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -190,14 +191,6 @@ deleteCompletedButton.addEventListener('click', async () => {
     }
 })
 
-function showLoader() {
-    overlay.style.display = 'flex'
-}
-
-function hideLoader() {
-    overlay.style.display = 'none'
-}
-
 addButton.addEventListener('click', async () => {
     try {
         showLoader()
@@ -277,17 +270,4 @@ async function updateTaskOrder() {
     } finally {
         hideLoader();
     }
-}
-
-function showError(message) {
-
-    const icon = message === 'Задач нет' ? 'info' : 'error';
-    const title = message === 'Задач нет' ? 'Задач еще нет' : 'Ошибка!';
-
-    Swal.fire({
-        title,
-        text: message,
-        icon,
-        showConfirmButton: true
-    })
 }
