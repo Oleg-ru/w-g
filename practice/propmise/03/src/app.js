@@ -2,10 +2,9 @@ import {
     getTodos,
     toggleTodoStatus,
     deleteTask,
-    updateTaskText,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, initAddTask} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -120,32 +119,7 @@ function renderData(tasks) {
     downloadButton.hidden = true;
 }
 
-async function setNewTextTask(taskId, taskText) {
 
-    const {value: newText} = await Swal.fire({
-        title: 'Редактирование задачи',
-        input: 'text',
-        inputLabel: 'ВВедите текст новой задачи',
-        inputValue: taskText,
-        showCancelButton: true,
-        confirmButtonText: 'Сохранить',
-        cancelButtonText: 'Отменить',
-        inputValidator: (value) => {
-            if (!value) {
-                return 'Поле не может быть пустым'
-            }
-        }
-    });
-
-    if (newText) {
-        try {
-            await updateTaskText(taskId, newText);
-            await loadData();
-        } catch (error) {
-            console.error(error.message);
-        }
-    }
-}
 downloadButton.addEventListener('click', loadData);
 initDeleteCompleted(container);
 initAddTask(addButton, taskInput)
