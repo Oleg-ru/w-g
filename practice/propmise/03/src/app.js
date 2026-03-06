@@ -8,12 +8,12 @@ import {
     deleteCompletedTodos
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
+import {initDragAndDrop} from "./components";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
 const downloadButton = document.querySelector(".button-download");
-const overlay = document.getElementById("overlay");
 const deleteCompletedButton = document.getElementById('delete-completed-button');
 
 export async function loadData() {
@@ -114,7 +114,7 @@ function renderData(tasks) {
         setNewTextButtonEl.appendChild(imgSetNewTextEl);
 
         //drag&drop
-        addDragAndDropListener(todoEl, task);
+        initDragAndDrop(todoEl, task, container);
 
         //Монтируем в контейнер таску
         todoEl.append(inputEl, taskTextEl, createdDateTaskEl, deleteButtonEl, setNewTextButtonEl);
@@ -218,56 +218,3 @@ taskInput.addEventListener('keydown', async (event) => {
     }
 });
 downloadButton.addEventListener('click', loadData);
-
-//Drag&Drop
-function addDragAndDropListener(todoElement, todo) {
-    todoElement.draggable = true;
-
-    todoElement.addEventListener('dragstart', (event) => {
-        event.dataTransfer.setData('text/plain', todo.id);
-        event.currentTarget.classList.add('dragging');
-    });
-
-    todoElement.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        const draggable = document.querySelector('.dragging');
-        const overElement = event.currentTarget;
-        if (overElement !== draggable) {
-            const rect = overElement.getBoundingClientRect();
-            const offset = event.clientY - rect.top;
-            if (offset < rect.height / 2) {
-                container.insertBefore(draggable, overElement)
-            } else {
-                container.insertBefore(draggable, overElement.nextSibling)
-            }
-        }
-    });
-
-    todoElement.addEventListener('dragend', (event) => {
-        event.currentTarget.classList.remove('dragging');
-        updateTaskOrder()
-    });
-}
-
-async function updateTaskOrder() {
-    const tasks = [...container.querySelectorAll('.todo')];
-    const updatedOrder = tasks.map((task, index) => {
-        return {
-            id: task.getAttribute('data-id'),
-            order: index + 1,
-        }
-    });
-
-    try {
-        showLoader();
-        for (const task of updatedOrder) {
-            await updateTaskOrderOnServer(task.id, task.order);
-        }
-        return true;
-    } catch (error) {
-        console.error(error.message);
-        showError('Не удалось поменять порядок задач');
-    } finally {
-        hideLoader();
-    }
-}
