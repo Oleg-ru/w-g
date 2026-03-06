@@ -4,7 +4,7 @@ import {
     deleteTask,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -119,7 +119,6 @@ function renderData(tasks) {
     downloadButton.hidden = true;
 }
 
-
-downloadButton.addEventListener('click', loadData);
 initDeleteCompleted(container);
-initAddTask(addButton, taskInput)
+initAddTask(addButton, taskInput);
+initLoadData(downloadButton);
