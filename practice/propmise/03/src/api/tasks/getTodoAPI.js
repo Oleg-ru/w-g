@@ -2,7 +2,7 @@ import {BASE_URL} from "../host.js";
 
 export async function getTodos() {
     try {
-        const response = await fetch(BASE_URL, {
+        const response = await fetch(`${BASE_URL}.json`, {
             method: 'GET'
         });
 
@@ -11,12 +11,18 @@ export async function getTodos() {
         }
         const data = await response.json();
 
-        if (data.length === 0) {
-            throw new Error('Задач нет')
+        if (!data) {
+            throw Error("Задач нет");
         }
 
-        data.sort((a, b) => a.order - b.order);
-        return data
+        const todosArray = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key]
+        }));
+        console.log(todosArray)
+
+        todosArray.sort((a, b) => a.order - b.order);
+        return todosArray
     } catch (error) {
         throw error; // проброс ошибки выше
     }

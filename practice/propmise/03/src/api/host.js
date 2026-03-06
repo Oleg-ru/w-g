@@ -1,1 +1,1 @@
-export const BASE_URL = "https://69a8666b37caab4b8c61a5a9.mockapi.io/api/v1/todos/";
+export const BASE_URL = "https://todo-060326-default-rtdb.europe-west1.firebasedatabase.app/todos/v1/";

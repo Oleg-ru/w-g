@@ -2,7 +2,7 @@ import {BASE_URL} from "../host.js";
 
 export async function deleteTask(taskId) {
     try {
-        const response = await fetch(`${BASE_URL}${taskId}`,{
+        const response = await fetch(`${BASE_URL}${taskId}.json`,{
             method: "DELETE"
         });
 

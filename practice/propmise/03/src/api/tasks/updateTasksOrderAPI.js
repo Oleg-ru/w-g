@@ -2,8 +2,8 @@ import {BASE_URL} from "../host.js";
 
 export async function updateTaskOrderOnServer(taskId, taskOrder) {
     try {
-        const response = await fetch(`${BASE_URL}${taskId}`,{
-            method: "PUT",
+        const response = await fetch(`${BASE_URL}${taskId}.json`,{
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },

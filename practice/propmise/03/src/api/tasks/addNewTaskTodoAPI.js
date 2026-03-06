@@ -2,7 +2,7 @@ import {BASE_URL} from "../host.js";
 
 export async function addTask(newTask) {
     try {
-        const response = await fetch(`${BASE_URL}`,{
+        const response = await fetch(`${BASE_URL}.json`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
