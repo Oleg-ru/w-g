@@ -1,10 +1,9 @@
 import {
     getTodos,
-    toggleTodoStatus,
     deleteTask,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData, initChangeCompleted} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -54,15 +53,7 @@ function renderData(tasks) {
         const inputEl = document.createElement('input');
         inputEl.type = 'checkbox';
         inputEl.checked = task.completed;
-        inputEl.addEventListener('change', async () => {
-            try {
-                await toggleTodoStatus(task.id, task.completed);
-                await loadData();
-            } catch (error) {
-                console.error(error.message);
-                showError('Не удалось изменить статус задачи');
-            }
-        });
+        initChangeCompleted(inputEl, task);
 
         //Текст таска
         const taskTextEl = document.createElement('p');
