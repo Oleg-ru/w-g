@@ -1,9 +1,8 @@
 import {
     getTodos,
-    deleteTask,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData, initChangeCompleted} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData, initChangeCompleted, initDeleteTask} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -67,15 +66,7 @@ function renderData(tasks) {
         //Кнопка удаления
         const deleteButtonEl = document.createElement('button');
         deleteButtonEl.className = 'button-function';
-        deleteButtonEl.addEventListener('click', async () => {
-            try {
-                await deleteTask(task.id)
-                await loadData();
-            } catch (error) {
-                console.error(error.message);
-                showError('Не удалось удалить задачу');
-            }
-        });
+        initDeleteTask(deleteButtonEl, task)
         const imgDeleteEl = document.createElement('img');
         imgDeleteEl.alt = 'Удалить';
         imgDeleteEl.title = 'Удалить';
