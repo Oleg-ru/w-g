@@ -2,7 +2,7 @@ import {
     getTodos,
 } from "./api/index.js";
 import {hideLoader, showError, showLoader} from "./utils/helpers.js";
-import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData, initChangeCompleted, initDeleteTask} from "./components/index.js";
+import {initDragAndDrop, initDeleteCompleted, initAddTask, setNewTextTask, initLoadData, initChangeCompleted, initDeleteTask, initChangeTextTask} from "./components/index.js";
 
 const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -76,15 +76,7 @@ function renderData(tasks) {
         //Кнопка изменить
         const setNewTextButtonEl = document.createElement('button');
         setNewTextButtonEl.className = 'button-function';
-        setNewTextButtonEl.addEventListener('click', async () => {
-            try {
-                await setNewTextTask(task.id, task.text)
-                await loadData();
-            } catch (error) {
-                console.error(error.message);
-                showError('Не удалось изменить текст задачи');
-            }
-        });
+        initChangeTextTask(setNewTextButtonEl, task);
         const imgSetNewTextEl = document.createElement('img');
         imgSetNewTextEl.alt = 'Изменить';
         imgSetNewTextEl.title = 'Изменить';
