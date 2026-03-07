@@ -228,13 +228,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 20px;
+  padding: 50px 20px;
   border-radius: 10px;
   background-color: #ffffff;
 }
 
 /*Заголовок формы*/
 form > h2 {
+  margin-bottom: 20px;
   text-align: center;
   color: #44c84a;
   font-size: 32px;
@@ -250,9 +251,18 @@ form > button {
   font-size: 1.1rem;
 }
 
+.or-signIn {
+  text-align: center;
+}
+
 #signIn {
-  background-color: rgba(72, 72, 74, 0.73);
+  cursor: pointer;
+  color: dodgerblue;
   transition: all 0.2s;
+}
+
+#signIn:hover {
+  color: #0f61b3;
 }
 
 .signup-btn, .signIn {
@@ -264,14 +274,15 @@ form > button {
   background-color: #359f3c;
 }
 
-.signup-btn:active, .signIn:active, #signIn:active {
+.signup-btn:active, .signIn:active {
   transform: scale(0.97);
 }
 
 /*Инпуты формы*/
 form > input {
+  font-size: 1.2rem;
   height: 33px;
-  padding: 5px;
+  padding: 10px;
 
   border-top: 0;
   border-right: 0;
@@ -282,5 +293,8 @@ form > input:focus {
   outline: none;
   border-color: black;
   border-bottom-width: 3px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
   background-color: rgba(72, 72, 74, 0.05);
+
 }
