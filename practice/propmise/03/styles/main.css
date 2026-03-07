@@ -168,6 +168,17 @@ body {
   transform: translateY(-2px);
 }
 
+#google-signup-button, #google-signin-button {
+  background-image: url("../assets/icons/google.png");
+  background-repeat: no-repeat;
+  background-color: #9f8608;
+  transition: all 0.2s;
+}
+
+#google-signup-button:hover, #google-signin-button:hover {
+  background-color: #615304;
+}
+
 /* Контейнер для задач */
 #posts-container {
   width: 100%;

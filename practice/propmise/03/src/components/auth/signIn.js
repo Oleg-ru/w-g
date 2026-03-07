@@ -1,9 +1,12 @@
 import {auth, signInWithEmailAndPassword, sendEmailVerification} from "../../firebaseConfig.js";
-import {loadData} from "../index.js";
+import {loadData, signWIthGoogle} from "../index.js";
 import {showConfirmation, showSuccess, showWarning} from "../../utils/notification.js";
 
 const signInForm = document.getElementById('signin-form');
 const taskContainer = document.getElementById('task-container');
+
+const googleButton = document.getElementById('google-signin-button');
+googleButton.addEventListener('click', signWIthGoogle)
 
 signInForm.addEventListener('submit', async (event) => {
     event.preventDefault();
