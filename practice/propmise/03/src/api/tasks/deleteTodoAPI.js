@@ -1,8 +1,10 @@
 import {BASE_URL} from "../host.js";
+import {getUserInfo} from "../../utils/authHelper.js";
 
 export async function deleteTask(taskId) {
     try {
-        const response = await fetch(`${BASE_URL}${taskId}.json`,{
+        const {uid, token} = await getUserInfo();
+        const response = await fetch(`${BASE_URL}/${uid}/${taskId}.json`,{
             method: "DELETE"
         });
 

@@ -1,7 +1,9 @@
 import {BASE_URL} from "../host.js";
+import {getUserInfo} from "../../utils/authHelper.js";
 
 export async function deleteCompletedTodos(container) {
     try {
+        const {uid, token} = await getUserInfo();
         const completedTasks = [...container.querySelectorAll('.todo')]
             .filter(task => {
                 const checkbox = task.querySelector('input[type="checkbox"]');
@@ -10,7 +12,7 @@ export async function deleteCompletedTodos(container) {
 
         for (let task of completedTasks) {
             const taskId = task.getAttribute('data-id');
-            const deleteResponse = await fetch(`${BASE_URL}${taskId}.json`,{
+            const deleteResponse = await fetch(`${BASE_URL}/${uid}/${taskId}.json`,{
                 method: "DELETE"
             });
 
