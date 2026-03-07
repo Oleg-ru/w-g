@@ -1,5 +1,6 @@
 import {updateTaskOrderOnServer} from "../../api/index.js";
-import {hideLoader, showError, showLoader} from "../../utils/helpers.js";
+import {hideLoader, showLoader} from "../../utils/helpers.js";
+import {showError} from "../../utils/notification.js";
 
 export async function updateTaskOrder(container) {
     const tasks = [...container.querySelectorAll('.todo')];

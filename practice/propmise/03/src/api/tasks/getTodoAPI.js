@@ -12,14 +12,13 @@ export async function getTodos(uid, token) {
         const data = await response.json();
 
         if (!data) {
-            throw Error("Задач нет");
+            return [];
         }
 
         const todosArray = Object.keys(data).map((key) => ({
             id: key,
             ...data[key]
         }));
-        console.log(todosArray)
 
         todosArray.sort((a, b) => a.order - b.order);
         return todosArray

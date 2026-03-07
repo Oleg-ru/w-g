@@ -1,20 +1,11 @@
-import {showError} from "../../utils/helpers.js";
 import {deleteCompletedTodos} from "../../api/index.js";
 import {deleteCompletedButton} from "../../app.js";
 import {loadData} from "../index.js";
+import {showConfirmation, showError} from "../../utils/notification.js";
 
 export function initDeleteCompleted(container) {
     deleteCompletedButton.addEventListener('click', async () => {
-        const {isConfirmed} = await Swal.fire({
-            title: "Вы уверены?",
-            text: "Удалим все выполненные задача",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Да, удалить их",
-            cancelButtonText: "Отменить"
-        });
+        const isConfirmed = await showConfirmation('Все выполненные задачи будут удалены. Уверены?');
 
         if (!isConfirmed) return;
 
