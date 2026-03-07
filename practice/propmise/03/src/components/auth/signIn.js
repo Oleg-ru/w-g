@@ -1,5 +1,6 @@
-import {auth, signInWithEmailAndPassword} from "../../firebaseConfig.js";
+import {auth, signInWithEmailAndPassword, sendEmailVerification} from "../../firebaseConfig.js";
 import {loadData} from "../index.js";
+import {showConfirmation, showSuccess, showWarning} from "../../utils/notification.js";
 
 const signInForm = document.getElementById('signin-form');
 const taskContainer = document.getElementById('task-container');
@@ -13,7 +14,16 @@ signInForm.addEventListener('submit', async (event) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        console.log("Пользователь успешно авторизован: " + user.uid);
+
+        if (!user.emailVerified) {
+            showWarning('Ваш email не подтвержден. Пожалуйста, проверьте вашу почту.');
+            const resend = await showConfirmation('Отправить письмо с подтверждением повторно?');
+             if (resend) {
+                 await sendEmailVerification(user);
+                 showSuccess('Письмо с подтверждение успешно отправлено')
+             }
+             return;
+        }
 
         hideSignInForm();
         showTasksBlock();

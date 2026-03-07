@@ -1,4 +1,5 @@
-import {auth, createUserWithEmailAndPassword} from "../../firebaseConfig.js";
+import {auth, createUserWithEmailAndPassword, sendEmailVerification} from "../../firebaseConfig.js";
+import {showError, showSuccess} from "../../utils/notification.js";
 
 const signupForm = document.getElementById('signup-form');
 const signInForm = document.getElementById('signin-form');
@@ -19,14 +20,15 @@ signupForm.addEventListener('submit', async (event) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        await sendEmailVerification(user);
         console.log("Пользователь успешно зареган: " + user.uid);
 
-        alert('Регистрация прошла успешно');
+        showSuccess('Для входа в приложение подтвердите ваш email. Письмо с подтверждением отправлено.');
         hideSignupForm();
         showSignInForm();
     } catch (error) {
         console.error('Ошибка регистрации: ', error.message, error.code);
-        alert(`Ошибка регистрации: ${error.message}`);
+        showError(`Ошибка регистрации.`);
     }
 });
 

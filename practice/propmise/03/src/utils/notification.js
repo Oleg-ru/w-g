@@ -1,4 +1,4 @@
-export const showNotification = (message, type, customTitle = null, timer = 1000) => {
+export const showNotification = (message, type, customTitle = null) => {
     const titles = {
         error: 'Ошибка!',
         success: 'Успех',
@@ -11,14 +11,14 @@ export const showNotification = (message, type, customTitle = null, timer = 1000
         title,
         text: message,
         icon: type,
-        timer,
-        showConfirmButton: type === 'error',
+        showConfirmButton: true,
+        confirmButtonText: 'OK'
     })
 };
 
 
 export const showError = (message) => {
-    showNotification(message, 'error', 'Ошибка!', 0);
+    showNotification(message, 'error', 'Ошибка!');
 };
 
 export const showSuccess = (message) => {
