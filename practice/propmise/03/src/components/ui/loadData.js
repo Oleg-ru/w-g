@@ -1,7 +1,7 @@
 import {hideLoader, showError, showLoader} from "../../utils/helpers.js";
 import {renderData} from "./renderData.js";
 import {getTodos} from "../../api/index.js";
-import {container, deleteCompletedButton, downloadButton} from '../../app.js'
+import {container, deleteCompletedButton} from '../../app.js'
 import {getUserInfo} from "../../utils/authHelper.js";
 
 export async function loadData() {
@@ -9,7 +9,7 @@ export async function loadData() {
         showLoader();
         const {uid, token} = await getUserInfo();
         const todos = await getTodos(uid, token);
-        renderData(todos, container, deleteCompletedButton, downloadButton);
+        renderData(todos, container, deleteCompletedButton);
     } catch (error) {
         console.error("Ошибка: " + error.message);
 

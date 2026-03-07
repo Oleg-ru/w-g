@@ -1,6 +1,6 @@
 import {initChangeCompleted, initChangeTextTask, initDeleteTask, initDragAndDrop} from "../index.js";
 
-export function renderData(tasks, container, deleteCompletedButton, downloadButton) {
+export function renderData(tasks, container, deleteCompletedButton) {
     container.innerHTML = '';
 
     //Если есть хоть 1 выполненная задача показываем кнопку удаления выполненных задач
@@ -62,5 +62,4 @@ export function renderData(tasks, container, deleteCompletedButton, downloadButt
         todoEl.append(inputEl, taskTextEl, createdDateTaskEl, deleteButtonEl, setNewTextButtonEl);
         container.append(todoEl);
     });
-    downloadButton.hidden = true;
 }
