@@ -13,6 +13,6 @@ const signInForm = document.getElementById('signin-form');
 const taskContainer = document.getElementById('task-container');
 
 signInForm.style.display = 'none';
-signupForm.style.display = 'block';
+signupForm.style.display = 'flex';
 taskContainer.style.display = 'none';
 

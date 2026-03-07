@@ -35,5 +35,5 @@ function hideSignupForm() {
 }
 
 function showSignInForm() {
-    signInForm.style.display = 'block';
+    signInForm.style.display = 'flex';
 }

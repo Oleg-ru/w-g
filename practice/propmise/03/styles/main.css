@@ -18,6 +18,37 @@ body {
   box-sizing: border-box;
 }
 
+/*Заголовок приложения*/
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Анимированный радужный текст */
+.rainbow {
+  font-size: 42px;              /* Размер текста */
+  font-weight: bold;            /* Толщина шрифта для яркости эффекта */
+
+  /* Градиент, который перемещается слева направо */
+  background: linear-gradient(
+          90deg,                      /* направление — горизонтально */
+          red, orange, yellow, green, cyan, blue, violet
+  );
+  background-size: 400%;        /* увеличенный размер фона для плавного движения */
+
+  -webkit-background-clip: text;/* используем фон как “заливку” текста */
+  color: transparent;           /* скрываем реальный цвет текста */
+
+  /* Анимация плавного движения градиента */
+  animation: rainbow 15s linear infinite;
+}
+
+/* Анимация перемещения радужного градиента */
+@keyframes rainbow {
+  0%   { background-position: 0%; }    /* стартовое положение градиента */
+  100% { background-position: 400%; }  /* градиент полностью проходит по тексту */
+}
+
 /* Overlay */
 #overlay {
   position: fixed;
@@ -188,4 +219,68 @@ body {
 
 .todo {
   transition: all 0.3s;
+}
+
+/*Формы*/
+
+#signup-form, #signin-form {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+/*Заголовок формы*/
+form > h2 {
+  text-align: center;
+  color: #44c84a;
+  font-size: 32px;
+}
+
+/*Кнопки формы*/
+form > button {
+  padding: 7px 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-size: 1.1rem;
+}
+
+#signIn {
+  background-color: rgba(72, 72, 74, 0.73);
+  transition: all 0.2s;
+}
+
+.signup-btn, .signIn {
+  background-color: #4caf50;
+  transition: all 0.2s;
+}
+
+.signup-btn:hover, .signIn:hover {
+  background-color: #359f3c;
+}
+
+.signup-btn:active, .signIn:active, #signIn:active {
+  transform: scale(0.97);
+}
+
+/*Инпуты формы*/
+form > input {
+  height: 33px;
+  padding: 5px;
+
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+form > input:focus {
+  outline: none;
+  border-color: black;
+  border-bottom-width: 3px;
+  background-color: rgba(72, 72, 74, 0.05);
 }
