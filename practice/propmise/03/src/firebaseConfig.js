@@ -8,7 +8,8 @@ import {
     signOut,
     sendEmailVerification,
     signInWithPopup,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    sendPasswordResetEmail
 } from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js'
 import {API_KEY} from "./api_config.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,5 +38,6 @@ export {
     signOut,
     sendEmailVerification,
     signInWithPopup,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    sendPasswordResetEmail
 }

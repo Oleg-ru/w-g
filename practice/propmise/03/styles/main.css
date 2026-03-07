@@ -179,6 +179,32 @@ body {
   background-color: #615304;
 }
 
+.forgot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+#forgot-password-button {
+  padding: 3px;
+  width: max-content;
+  background-color: transparent;
+  border: none;
+}
+
+#forgot-password-button:hover {
+  cursor: pointer;
+  background-color: #706d6f;
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+#forgot-password-button:active {
+  transform: scale(0.98);
+}
+
 /* Контейнер для задач */
 #posts-container {
   width: 100%;
@@ -325,4 +351,11 @@ form > input:focus {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   background-color: rgba(72, 72, 74, 0.05);
+}
+
+/*Форма сброса пароля*/
+#forgot-password-form {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
 }

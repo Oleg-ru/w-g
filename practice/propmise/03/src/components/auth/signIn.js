@@ -6,7 +6,11 @@ const signInForm = document.getElementById('signin-form');
 const taskContainer = document.getElementById('task-container');
 
 const googleButton = document.getElementById('google-signin-button');
-googleButton.addEventListener('click', signWIthGoogle)
+googleButton.addEventListener('click', signWIthGoogle);
+
+const forgotPasswordForm = document.getElementById('forgot-password-form');
+const forgotPasswordButton = document.getElementById('forgot-password-button');
+forgotPasswordButton.addEventListener('click', showForgotPasswordForm)
 
 signInForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -43,4 +47,9 @@ export function showTasksBlock() {
 
 export function hideSignInForm() {
     signInForm.style.display = 'none';
+}
+
+function showForgotPasswordForm() {
+    forgotPasswordForm.style.display = 'flex';
+    hideSignInForm();
 }
