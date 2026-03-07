@@ -1,4 +1,4 @@
-import {initDeleteCompleted, initAddTask, initLoadData} from "./components/index.js";
+import {initDeleteCompleted, initAddTask} from "./components/index.js";
 
 export const container = document.getElementById("posts-container");
 const taskInput = document.getElementById("task-input");
@@ -8,7 +8,6 @@ export const deleteCompletedButton = document.getElementById('delete-completed-b
 
 initDeleteCompleted(container);
 initAddTask(addButton, taskInput);
-initLoadData(downloadButton);
 
 const signupForm = document.getElementById('signup-form');
 const signInForm = document.getElementById('signin-form');
