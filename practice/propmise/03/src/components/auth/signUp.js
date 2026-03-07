@@ -30,10 +30,10 @@ signupForm.addEventListener('submit', async (event) => {
     }
 });
 
-function hideSignupForm() {
+export function hideSignupForm() {
     signupForm.style.display = 'none';
 }
 
-function showSignInForm() {
+export function showSignInForm() {
     signInForm.style.display = 'flex';
 }

@@ -124,7 +124,7 @@ body {
 }
 
 /* Кнопки */
-.button-download, #delete-completed-button {
+.button-download, #delete-completed-button, #logout-button {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
@@ -153,6 +153,19 @@ body {
 
 .button-download:active, #delete-completed-button:active {
   transform: translateY(0);
+}
+
+#logout-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  margin-top: 10px;
+  background-color: #313580;
+}
+
+#logout-button:hover {
+  background-color: #202465;
+  transform: translateY(-2px);
 }
 
 /* Контейнер для задач */
@@ -221,11 +234,16 @@ body {
   transition: all 0.3s;
 }
 
+/*Контейнер задач*/
+#task-container {
+  display: none;
+}
+
 /*Формы*/
 
 #signup-form, #signin-form {
   width: 50vw;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 15px;
   padding: 50px 20px;
@@ -296,5 +314,4 @@ form > input:focus {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   background-color: rgba(72, 72, 74, 0.05);
-
 }
