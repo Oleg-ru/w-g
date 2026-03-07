@@ -1,8 +1,8 @@
 import {BASE_URL} from "../host.js";
 
-export async function getTodos() {
+export async function getTodos(uid, token) {
     try {
-        const response = await fetch(`${BASE_URL}.json`, {
+        const response = await fetch(`${BASE_URL}/${uid}.json`, {
             method: 'GET'
         });
 
