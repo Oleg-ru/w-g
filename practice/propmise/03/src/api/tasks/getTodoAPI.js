@@ -2,7 +2,7 @@ import {BASE_URL} from "../host.js";
 
 export async function getTodos(uid, token) {
     try {
-        const response = await fetch(`${BASE_URL}/${uid}.json`, {
+        const response = await fetch(`${BASE_URL}/${uid}.json?auth=${token}`, {
             method: 'GET'
         });
 

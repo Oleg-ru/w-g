@@ -4,7 +4,7 @@ import {getUserInfo} from "../../utils/authHelper.js";
 export async function deleteTask(taskId) {
     try {
         const {uid, token} = await getUserInfo();
-        const response = await fetch(`${BASE_URL}/${uid}/${taskId}.json`,{
+        const response = await fetch(`${BASE_URL}/${uid}/${taskId}.json?auth=${token}`,{
             method: "DELETE"
         });
 

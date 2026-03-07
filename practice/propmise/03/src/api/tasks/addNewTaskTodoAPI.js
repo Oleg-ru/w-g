@@ -4,7 +4,7 @@ import {getUserInfo} from "../../utils/authHelper.js";
 export async function addTask(newTask) {
     try {
         const {uid, token} = await getUserInfo();
-        const response = await fetch(`${BASE_URL}/${uid}.json`,{
+        const response = await fetch(`${BASE_URL}/${uid}.json?auth=${token}`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

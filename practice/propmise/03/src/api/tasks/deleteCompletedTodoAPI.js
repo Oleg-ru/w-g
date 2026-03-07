@@ -12,7 +12,7 @@ export async function deleteCompletedTodos(container) {
 
         for (let task of completedTasks) {
             const taskId = task.getAttribute('data-id');
-            const deleteResponse = await fetch(`${BASE_URL}/${uid}/${taskId}.json`,{
+            const deleteResponse = await fetch(`${BASE_URL}/${uid}/${taskId}.json?auth=${token}`,{
                 method: "DELETE"
             });
 
