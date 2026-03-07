@@ -9,3 +9,12 @@ export const deleteCompletedButton = document.getElementById('delete-completed-b
 initDeleteCompleted(container);
 initAddTask(addButton, taskInput);
 initLoadData(downloadButton);
+
+const signupForm = document.getElementById('signup-form');
+const signInForm = document.getElementById('signin-form');
+const taskContainer = document.getElementById('task-container');
+
+signInForm.style.display = 'none';
+signupForm.style.display = 'block';
+taskContainer.style.display = 'none';
+
