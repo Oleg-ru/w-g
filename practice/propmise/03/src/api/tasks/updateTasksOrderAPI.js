@@ -18,7 +18,6 @@ export async function updateTaskOrderOnServer(taskId, taskOrder) {
 
         return true;
     } catch (error) {
-        console.error("Ошибка: " + error.message);
         throw error;
     }
 }

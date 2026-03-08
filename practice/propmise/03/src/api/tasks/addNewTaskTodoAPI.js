@@ -17,7 +17,6 @@ export async function addTask(newTask) {
         }
         return true;
     } catch (error) {
-        console.error("Ошибка: " + error.message)
         throw error;
     }
 }

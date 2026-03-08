@@ -13,7 +13,6 @@ export async function deleteTask(taskId) {
         }
         return true;
     } catch (error) {
-        console.error("Ошибка: " + error.message)
-        throw error
+        throw error;
     }
 }

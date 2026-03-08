@@ -1,5 +1,6 @@
 import {loadData} from "../index.js";
 import {updateTaskText} from "../../api/index.js";
+import {showError} from "../../utils/notification.js";
 
 export async function setNewTextTask(taskId, taskText) {
 
@@ -24,6 +25,7 @@ export async function setNewTextTask(taskId, taskText) {
             await loadData();
         } catch (error) {
             console.error(error.message);
+            showError('Не удалось изменить текст задачи');
         }
     }
 }

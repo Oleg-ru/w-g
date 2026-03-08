@@ -17,7 +17,6 @@ export async function toggleTodoStatus(taskId, completed) {
         }
         return true;
     } catch (error) {
-        console.error("Ошибка: " + error.message)
-        throw error
+        throw error;
     }
 }

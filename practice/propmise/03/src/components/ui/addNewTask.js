@@ -1,10 +1,11 @@
 import {addTask} from "../../api/index.js";
+import {showWarning} from "../../utils/notification.js";
 
 export async function addNewTask(taskInput) {
     const newTextTask = taskInput.value.trim();
 
     if (!newTextTask) {
-        alert('Для добавления новой задачи нужно указать текст!');
+        showWarning('Для добавления новой задачи нужно указать текст!');
         return;
     }
 
@@ -14,6 +15,11 @@ export async function addNewTask(taskInput) {
         completed: false,
     };
 
-    await addTask(newTask);
+
+    try {
+        await addTask(newTask);
+    } catch (error) {
+        throw error;
+    }
     taskInput.value = '';
 }

@@ -22,7 +22,6 @@ export async function deleteCompletedTodos(container) {
         }
         return true;
     } catch (error) {
-        console.error("Ошибка: " + error.message)
         throw error;
     }
 }

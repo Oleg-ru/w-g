@@ -18,7 +18,6 @@ export async function updateTaskText(taskId, newText) {
 
         return true
     } catch (error) {
-        console.error("Ошибка: " + error.message);
         throw error;
     }
 }
