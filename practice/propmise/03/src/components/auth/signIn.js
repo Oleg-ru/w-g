@@ -1,6 +1,6 @@
 import {auth, signInWithEmailAndPassword, sendEmailVerification} from "../../firebaseConfig.js";
 import {loadData, signWIthGoogle} from "../index.js";
-import {showConfirmation, showSuccess, showWarning} from "../../utils/notification.js";
+import {showConfirmation, showError, showSuccess, showWarning} from "../../utils/notification.js";
 
 const signInForm = document.getElementById('signin-form');
 const taskContainer = document.getElementById('task-container');
@@ -36,8 +36,21 @@ signInForm.addEventListener('submit', async (event) => {
         showTasksBlock();
         await loadData()
     } catch (error) {
-        console.error('Ошибка авторизации: ', error.message, error.code);
-        alert(`Ошибка авторизации: ${error.message}`);
+
+        switch (error.code) {
+            case 'auth/too-many-requests': {
+                showWarning('Слишком много попыток входа. Попробуйте позже.');
+                break;
+            }
+            case 'auth/invalid-credential': {
+                showWarning('Неверные учетные данные. Проверьте email или пароль');
+                break;
+            }
+            default: {
+                console.error('Ошибка авторизации: ', error.message, error.code);
+                showError(`Произошла неизвестная ошибка авторизации.`);
+            }
+        }
     }
 });
 

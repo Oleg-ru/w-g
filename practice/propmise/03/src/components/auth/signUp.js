@@ -1,5 +1,5 @@
 import {auth, createUserWithEmailAndPassword, sendEmailVerification} from "../../firebaseConfig.js";
-import {showError, showSuccess} from "../../utils/notification.js";
+import {showError, showSuccess, showWarning} from "../../utils/notification.js";
 import {signWIthGoogle} from "../index.js";
 
 const signupForm = document.getElementById('signup-form');
@@ -31,8 +31,24 @@ signupForm.addEventListener('submit', async (event) => {
         hideSignupForm();
         showSignInForm();
     } catch (error) {
-        console.error('Ошибка регистрации: ', error.message, error.code);
-        showError(`Ошибка регистрации.`);
+        switch (error.code) {
+            case 'auth/email-already-exists': {
+                showWarning('Указанный email уже зарегистрирован. Пожалуйста, войдите в систему');
+                break;
+            }
+            case 'auth/invalid-email': {
+                showWarning('Неверный формат email');
+                break;
+            }
+            case 'auth/weak-password': {
+                showWarning('Пароль должен быть не менее 6 символов');
+                break;
+            }
+            default: {
+                console.error('Ошибка регистрации: ', error.message, error.code);
+                showError(`Произошла неизвестная ошибка регистрации.`);
+            }
+        }
     }
 });
 
