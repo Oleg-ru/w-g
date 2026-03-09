@@ -1,13 +1,19 @@
+import {showError} from "./error.js";
+
 const hourlyForecast = document.querySelector('.hourly-scroll');
 
 export function renderHourlyForecast(data) {
     hourlyForecast.innerHTML = '';
+    if (!data) {
+        showError('Данные о погоде не доступны');
+    }
     const currentDate = new Date();
     currentDate.setHours(0,0,0,0);
     const daysOfWeek = ['Вс', 'Пн','Вт','Ср','Чт','Пт','Сб'];
+    const timeZoneOffset = data.city.timeZone * 1000;
 
     data.list.forEach(item => {
-        const date = new Date(item.dt * 1000);
+        const date = new Date(item.dt * 1000 + timeZoneOffset);
         const hour = date.getHours();
         const temp = Math.round(item.main.temp);
         const icon = item.weather[0].icon;
