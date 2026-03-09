@@ -3,6 +3,7 @@ import {showError} from "../components/error.js";
 import {isCyrillic} from "../helpers/checkCyrillic.js";
 import {replaceAbbreviation} from "../helpers/cityAbbreviation.js";
 import {saveCityToLocalStorage} from "../helpers/saveCityToLocalStorage.js";
+import {getForecast, getWeather} from "./getWeatherAndForecast.js";
 
 export const getGeoData = async (cityInput) => {
     let city = cityInput.value.trim();
@@ -30,6 +31,12 @@ export const getGeoData = async (cityInput) => {
 
         const {lat, lon} = geoData[0];
         saveCityToLocalStorage(city);
+        const weatherData = await getWeather(lat, lon);
+        const forecastData = await getForecast(lat, lon);
+
+        console.log(weatherData)
+        console.log(forecastData)
+
         console.log(lat, lon);
     } catch (error) {
         console.error(error.message);
