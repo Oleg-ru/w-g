@@ -37,9 +37,6 @@ export const getGeoData = async (cityInput) => {
         const weatherData = await getWeather(lat, lon);
         const forecastData = await getForecast(lat, lon);
 
-        console.log(weatherData);
-        console.log(forecastData);
-
         //текущая погода
         renderCurrentWeather(weatherData, city);
         //погода по часам
