@@ -6,6 +6,7 @@ import {saveCityToLocalStorage} from "../helpers/saveCityToLocalStorage.js";
 import {getForecast, getWeather} from "./getWeatherAndForecast.js";
 import {renderCurrentWeather} from "../components/currentWeather.js";
 import {renderHourlyForecast} from "../components/hourlyForecast.js";
+import {renderDailyForecast} from "../components/dailyForecast.js";
 
 export const getGeoData = async (cityInput) => {
     let city = cityInput.value.trim();
@@ -39,10 +40,12 @@ export const getGeoData = async (cityInput) => {
         console.log(weatherData);
         console.log(forecastData);
 
+        //текущая погода
         renderCurrentWeather(weatherData, city);
+        //погода по часам
         renderHourlyForecast(forecastData);
-
-        console.log(lat, lon);
+        //погода по дням
+        renderDailyForecast(forecastData);
     } catch (error) {
         console.error(error.message);
         showError('Данные не получены');
