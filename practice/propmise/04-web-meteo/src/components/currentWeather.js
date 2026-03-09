@@ -1,7 +1,8 @@
 import {updateWindDirection} from "../helpers/windParam.js";
 import {updateHumidityScale} from "../helpers/humidityParam.js";
 import {formatTime} from "../helpers/formatTime.js";
-import {callDayLength} from "../helpers/callDayLength.js";
+import {calcDayLength} from "../helpers/callDayLength.js";
+import {calcSunPosition, updateSunPosition} from "../helpers/calcSunPosition.js";
 
 const currentCity = document.querySelector('.city');
 const currentTemp = document.querySelector('.temperature');
@@ -48,5 +49,9 @@ export function renderCurrentWeather(data, city) {
     sunsetItem.textContent = sunrise ? formatTime(sunset, timezone) : 'Неизвестно';
 
     //Долгота дня
-    dayLength.textContent = `Долгота дня: ${sunrise && sunset ? callDayLength(sunrise, sunset) : 'Неизвестно'}`;
+    dayLength.textContent = `Долгота дня: ${sunrise && sunset ? calcDayLength(sunrise, sunset) : 'Неизвестно'}`;
+
+    //Положение солнца
+    const sunPosition = sunrise && sunset ? calcSunPosition(sunrise, sunset) : 0;
+    updateSunPosition(sunPosition);
 }
