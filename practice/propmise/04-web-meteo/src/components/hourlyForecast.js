@@ -10,7 +10,7 @@ export function renderHourlyForecast(data) {
     const currentDate = new Date();
     currentDate.setHours(0,0,0,0);
     const daysOfWeek = ['Вс', 'Пн','Вт','Ср','Чт','Пт','Сб'];
-    const timeZoneOffset = data.city.timeZone * 1000;
+    const timeZoneOffset = data.city.timezone * 1000;
 
     data.list.forEach(item => {
         const date = new Date(item.dt * 1000 + timeZoneOffset);
