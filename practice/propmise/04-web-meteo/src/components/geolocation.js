@@ -9,7 +9,6 @@ export function geolocation() {
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             const {longitude, latitude} = await getBrowserGeolocation();
-            console.log(latitude, longitude)
             const locationName = await geoLocationName(latitude, longitude);
             await fetchWeatherByCoords(latitude, longitude, locationName);
         } catch (error) {
