@@ -2,6 +2,7 @@ import {apiKey, BASE_URL} from './apiKeyAndHost.js'
 import {showError} from "../components/error.js";
 import {isCyrillic} from "../helpers/checkCyrillic.js";
 import {replaceAbbreviation} from "../helpers/cityAbbreviation.js";
+import {saveCityToLocalStorage} from "../helpers/saveCityToLocalStorage.js";
 
 export const getGeoData = async (cityInput) => {
     let city = cityInput.value.trim();
@@ -28,6 +29,7 @@ export const getGeoData = async (cityInput) => {
         }
 
         const {lat, lon} = geoData[0];
+        saveCityToLocalStorage(city);
         console.log(lat, lon);
     } catch (error) {
         console.error(error.message);
