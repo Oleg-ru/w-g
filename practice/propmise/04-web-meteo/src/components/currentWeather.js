@@ -1,5 +1,7 @@
 import {updateWindDirection} from "../helpers/windParam.js";
 import {updateHumidityScale} from "../helpers/humidityParam.js";
+import {formatTime} from "../helpers/formatTime.js";
+import {callDayLength} from "../helpers/callDayLength.js";
 
 const currentCity = document.querySelector('.city');
 const currentTemp = document.querySelector('.temperature');
@@ -10,8 +12,12 @@ const currentWind = document.querySelector('.wind');
 const currentVisibility = document.querySelector('.visibility');
 const currentHumidity = document.querySelector('.humidity');
 const currentPressure = document.querySelector('.pressure');
+const sunriseItem = document.querySelector('.sunrise');
+const sunsetItem = document.querySelector('.sunset');
+const dayLength = document.querySelector('.day-length');
 
 export function renderCurrentWeather(data, city) {
+    //Данные о погоде
     currentCity.textContent = city || 'Неизвестно';
     currentTemp.textContent = `${Math.round(data.main?.temp) || 0}°C`;
     feelsLike.textContent = `Ощущается как ${Math.round(data.main?.feels_like) || 0}°C`;
@@ -27,9 +33,20 @@ export function renderCurrentWeather(data, city) {
     currentHumidity.textContent = `${data.main?.humidity || 0}%`;
     currentPressure.textContent = `${Math.round((data.main?.pressure || 0) * 0.750062)} мм рт.ст.`;
 
+    // Направление ветра
     const windDegrees = data.wind?.deg || 0;
     updateWindDirection(windDegrees);
 
+    //Индикатор влажности
     const humidity = data.main?.humidity || 0;
     updateHumidityScale(humidity);
+
+    // Восход\заход солнца
+    const {sunrise, sunset} = data.sys || {};
+    const {timezone} = data || {};
+    sunriseItem.textContent = sunrise ? formatTime(sunrise, timezone) : 'Неизвестно';
+    sunsetItem.textContent = sunrise ? formatTime(sunset, timezone) : 'Неизвестно';
+
+    //Долгота дня
+    dayLength.textContent = `Долгота дня: ${sunrise && sunset ? callDayLength(sunrise, sunset) : 'Неизвестно'}`;
 }
