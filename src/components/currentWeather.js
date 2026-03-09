@@ -1,4 +1,5 @@
 import {updateWindDirection} from "../helpers/windParam.js";
+import {updateHumidityScale} from "../helpers/humidityParam.js";
 
 const currentCity = document.querySelector('.city');
 const currentTemp = document.querySelector('.temperature');
@@ -28,4 +29,7 @@ export function renderCurrentWeather(data, city) {
 
     const windDegrees = data.wind?.deg || 0;
     updateWindDirection(windDegrees);
+
+    const humidity = data.main?.humidity || 0;
+    updateHumidityScale(humidity);
 }
