@@ -4,6 +4,8 @@ class Dog {
         this.breed = breed;
         this.weight = weight;
     }
+
+    static color = 'gray';
     bark() {
         console.log(`${this.name} Гавкает!`)
     }
@@ -21,3 +23,4 @@ const dog1 = new Dog('He', 'dog', 10);
 console.log(dog1)
 dog1.incrementWeight()
 dog1.incrementWeight()
+console.log(Dog.color)
