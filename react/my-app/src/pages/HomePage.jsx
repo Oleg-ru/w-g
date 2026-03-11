@@ -1,12 +1,13 @@
 import React from 'react';
 import './HomePage.css'
-import HocComponent from "../components/HOCComponent/HOCComponent.jsx";
+import Container from "../components/Container/Container.jsx";
+import ModalPage from "../components/ModalPage/ModalPage.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <HocComponent />
+            <ModalPage />
         </div>
     );
 }
