@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import RegForm from "../components/RegForm/RegForm.jsx";
+import HocComponent from "../components/HOCComponent/HOCComponent.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <RegForm />
+            <HocComponent />
         </div>
     );
 }
