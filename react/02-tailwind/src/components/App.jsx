@@ -3,7 +3,7 @@ import './App.css'
 function App() {
 
     return (
-        <>
+        <div className="font-bit">
             <div className="container bg-gray-600 mx-auto">
                 <h1 className="text-4xl font-bold text-blue-400 text-center mt-5">React + Tailwind.css</h1>
                 <div
@@ -60,25 +60,25 @@ function App() {
                 <div className="flex dlex-col gap-2 bg-cyan-400 shadow-md rounded-lg m-3 p-4 w-64">
                     <h2 className="text-lg font-bold">Карточка 1</h2>
                     <p className="text-gray-400">Описание карточки 1</p>
-                    <button className="mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
+                    <button className="font-roboto mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
                 </div>
                 <div className="flex dlex-col gap-2 bg-cyan-400 shadow-md rounded-lg m-3 p-4 w-64">
                     <h2 className="text-lg font-bold">Карточка 2</h2>
                     <p className="text-gray-400">Описание карточки 2</p>
-                    <button className="mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
+                    <button className="font-roboto mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
                 </div>
                 <div className="flex dlex-col gap-2 bg-cyan-400 shadow-md rounded-lg m-3 p-4 w-64">
                     <h2 className="text-lg font-bold">Карточка 3</h2>
                     <p className="text-gray-400">Описание карточки 3</p>
-                    <button className="mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
+                    <button className="font-roboto mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
                 </div>
                 <div className="flex dlex-col gap-2 bg-cyan-400 shadow-md rounded-lg m-3 p-4 w-64">
                     <h2 className="text-lg font-bold">Карточка 4</h2>
                     <p className="text-gray-400">Описание карточки 4</p>
-                    <button className="mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
+                    <button className="font-roboto mt-2 bg-amber-600 text-amber-950 rounded-lg py-2 cursor-pointer">Купить</button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
