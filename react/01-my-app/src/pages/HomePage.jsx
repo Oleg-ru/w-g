@@ -1,13 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import Container from "../components/Container/Container.jsx";
-import ModalPage from "../components/ModalPage/ModalPage.jsx";
+import CustomVideoPlayer from "../components/HookUseRef/CustomVideoPlayer.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <ModalPage />
+            <CustomVideoPlayer />
         </div>
     );
 }
