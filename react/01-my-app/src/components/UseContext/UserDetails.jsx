@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
-import {UserContext} from "./context/UserContext.js";
+import React from 'react';
+import { useUserContext} from "./context/UserContext.jsx";
 
 function UserDetails(props) {
-    const user = useContext(UserContext);
+    const user =  useUserContext();
     return (
         <div>
             <h3>Детали</h3>

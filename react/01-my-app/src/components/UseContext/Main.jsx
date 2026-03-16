@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "./Header.jsx";
-import {UserContext} from "./context/UserContext.js";
+import {UserContext} from "./context/UserContext.jsx";
 
 function Main(props) {
 

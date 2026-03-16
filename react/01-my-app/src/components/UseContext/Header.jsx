@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import UserInfo from "./UserInfo.jsx";
-import {UserContext} from "./context/UserContext.js";
+import {useUserContext} from "./context/UserContext.jsx";
 
 function Header(props) {
-    const user = useContext(UserContext);
+    const user = useUserContext();
     return (
         <div>
             <h1>Добро пожаловать, {user.name}</h1>
