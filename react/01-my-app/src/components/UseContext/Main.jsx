@@ -1,23 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from "./Header.jsx";
-import {UserContext} from "./context/UserContext.jsx";
+import {UserProvider} from "./context/UserContext.jsx";
+import {PlayerProvider} from "./context/PlayerContext.jsx";
 
 function Main(props) {
 
-    const [user, setUser] = useState({
-        name: 'Вальдемар',
-        email: "example@email.ru"
-    });
-
-    function updateUser(newUser) {
-        setUser(newUser)
-    }
-
     return (
         <>
-            <UserContext.Provider value={{user, updateUser}}>
-                <Header/>
-            </UserContext.Provider>
+            <UserProvider>
+                <PlayerProvider>
+                    <Header/>
+                </PlayerProvider>
+            </UserProvider>
         </>
     );
 }
