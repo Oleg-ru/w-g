@@ -1,42 +1,29 @@
 import React, {useState} from 'react';
 import LoginForm from "./LoginForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
+import {useForm} from "./useForm.js";
 
 function MainForm(props) {
 
-    const [loginData, setLoginData] = useState({});
-    const [registerData, setRegisterData] = useState({});
-
-    function handleLoginChange(key, value) {
-        setLoginData({
-            ...loginData,
-            [key]: value,
-        })
-    }
-    
-    function handleLoginSubmit(event) {
-        event.preventDefault();
-        console.log('Данные авторизации: ', loginData)
-    }
-
-    function handleRegisterChange(key, value) {
-        setRegisterData({
-            ...registerData,
-            [key]: value,
-        })
-    }
+    const loginData = useForm({});
+    const registerData = useForm({});
 
     function handleRegisterSubmit(event) {
         event.preventDefault();
-        console.log('Данные авторизации: ', registerData)
+        console.log('Данные авторизации: ', registerData.formData)
+    }
+
+    function handleLoginSubmit(event) {
+        event.preventDefault();
+        console.log('Данные авторизации: ', loginData.formData)
     }
 
     return (
         <div>
             <h2>Авторизация</h2>
-            <LoginForm formData={loginData} handleChange={handleLoginChange} handleSubmit={handleLoginSubmit}/>
+            <LoginForm formData={loginData.formData} handleChange={loginData.handleChange} handleSubmit={registerData.handleSubmit}/>
             <h2>Регистрация</h2>
-            <RegisterForm formData={registerData} handleChange={handleRegisterChange} handleSubmit={handleRegisterSubmit} />
+            <RegisterForm formData={registerData.formData} handleChange={registerData.handleChange} handleSubmit={registerData.handleSubmit} />
         </div>
     );
 }
