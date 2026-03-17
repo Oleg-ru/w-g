@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import Main from "../components/CustomHooks/Main.jsx";
+import MainForm from "../components/CustomHooks/CustomForm/MainForm.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <Main />
+            <MainForm />
         </div>
     );
 }
