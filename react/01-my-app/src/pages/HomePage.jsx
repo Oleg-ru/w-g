@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import MainStorage from "../components/CustomHooks/CustomUseLocalStorage/MainStorage.jsx";
+import MainApi from "../components/CustomHooks/CustomUseApi/MainApi.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <MainStorage />
+            <MainApi />
         </div>
     );
 }
