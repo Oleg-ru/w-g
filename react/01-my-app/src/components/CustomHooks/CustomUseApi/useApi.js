@@ -1,4 +1,5 @@
 import {useCallback, useState} from "react";
+import axios from "axios";
 
 export const useApi = (baseUrl) => {
 
@@ -6,81 +7,29 @@ export const useApi = (baseUrl) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const get = useCallback( async (endpoint) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${baseUrl}/${endpoint}`);
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP-запроса! Статус: ${response.status}`)
-            }
-            const result = await response.json();
-            setData(result);
-        } catch (e) {
-            setError(e)
-        } finally {
-            setLoading(false);
+    const api = axios.create({
+        baseURL: baseUrl,
+        headers: {
+            "Content-Type": "application/json"
         }
-    }, [baseUrl]);
+    });
 
-    const post = useCallback( async (endpoint, body) => {
-        setLoading(true);
+    const request = useCallback(async (method, endpoint, body = null) => {
         try {
-            const response = await fetch(`${baseUrl}/${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(body)
-            });
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP-запроса! Статус: ${response.status}`)
-            }
-            const result = await response.json();
-            setData(result);
+            const response = await api[method](endpoint, body);
+            setData(response.data);
         } catch (e) {
             setError(e)
-        } finally {
-            setLoading(false);
         }
-    }, [baseUrl]);
+    }, [api]);
 
-    const put = useCallback( async (endpoint, body) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${baseUrl}/${endpoint}`, {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(body)
-            });
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP-запроса! Статус: ${response.status}`)
-            }
-            const result = await response.json();
-            setData(result);
-        } catch (e) {
-            setError(e)
-        } finally {
-            setLoading(false);
-        }
-    }, [baseUrl]);
+    const get = useCallback(async (endpoint) => request('get', endpoint), [request]);
 
-    const remove = useCallback( async (endpoint) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${baseUrl}/${endpoint}`, {
-                method: 'DELETE'
-            });
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP-запроса! Статус: ${response.status}`)
-            }
-        } catch (e) {
-            setError(e)
-        } finally {
-            setLoading(false);
-        }
-    }, [baseUrl]);
+    const post = useCallback(async (endpoint, body) => request('post', endpoint, body), [request]);
+
+    const put = useCallback(async (endpoint, body) => request('put', endpoint, body), [request]);
+
+    const remove = useCallback(async (endpoint) => request('delete', endpoint), [api]);
 
     return {data, loading, error, get, post, put, remove}
 };
