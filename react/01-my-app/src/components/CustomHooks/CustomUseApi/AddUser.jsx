@@ -30,7 +30,7 @@ function AddUser(props) {
 
     return (
         <div>
-            <h2>Добавить пользователя</h2>
+            <h2>Изменить пользователя</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>
