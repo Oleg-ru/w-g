@@ -1,7 +1,10 @@
-import {useState} from "react";
+import {useDebugValue, useState} from "react";
 
 export const useForm = (initialState) => {
     const [formData, setFormData] = useState(initialState);
+    useDebugValue(formData, (data) => {
+        return `данные из формы: ${data}`
+    })
 
     function handleChange(key, value) {
         setFormData({
