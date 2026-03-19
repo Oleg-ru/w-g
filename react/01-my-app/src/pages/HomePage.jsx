@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import MainCounter from "../components/CustomHooks_StandartHooks/UseReducer/MainCounter.jsx";
+import MainTransition from "../components/CustomHooks_StandartHooks/UseTransition/MainTransition.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <MainCounter />
+            <MainTransition />
         </div>
     );
 }
