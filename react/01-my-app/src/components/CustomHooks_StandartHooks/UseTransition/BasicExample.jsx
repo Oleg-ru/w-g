@@ -6,7 +6,7 @@ function BasicExample(props) {
 
     function handleCLick() {
         startTransition(() => {
-            setCount(prev => prev + 1);
+            setCount(prev => prev + 1); 
         })
 
     }
