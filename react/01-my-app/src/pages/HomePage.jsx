@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css'
-import MainTransition from "../components/CustomHooks_StandartHooks/UseTransition/MainTransition.jsx";
+import MainUseDeferredValue from "../components/CustomHooks_StandartHooks/UseDeferredValue/MainUseDeferredValue.jsx";
 
 function HomePage(props) {
 
     return (
         <div className="homePage">
-            <MainTransition />
+            <MainUseDeferredValue />
         </div>
     );
 }
