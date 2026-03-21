@@ -3,6 +3,7 @@ import {useState} from "react";
 import TodoItem from "./components/TodoItem/TodoItem.jsx";
 import AddTodo from "./components/AddTodo/AddTodo.jsx";
 import ToggleTheme from "./components/ToggleTheme/ToggleTheme.jsx";
+import {getInitialTheme} from "./helpers/getInitialTheme.js";
 
 
 function App() {
@@ -13,20 +14,6 @@ function App() {
     ];
     const [todos, setTodos] = useState(initialTodos);
     const [theme, setTheme] = useState(getInitialTheme());
-
-    function getInitialTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-        if (savedTheme) {
-            return savedTheme;
-        } else if (prefersDark) {
-            return 'dark';
-        } else {
-            const hours = new Date().getHours();
-            return hours < 6 || hours >= 21 ? "dark" : "light";
-        }
-    }
 
     function onDelete(id) {
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
