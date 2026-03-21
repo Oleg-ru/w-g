@@ -2,6 +2,7 @@ import './App.css'
 import {useState} from "react";
 import TodoItem from "./components/TodoItem/TodoItem.jsx";
 import AddTodo from "./components/AddTodo/AddTodo.jsx";
+import ToggleTheme from "./components/ToggleTheme/ToggleTheme.jsx";
 
 
 function App() {
@@ -27,14 +28,6 @@ function App() {
         }
     }
 
-    function toggleTheme() {
-        setTheme((prevTheme) => {
-            const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            return newTheme;
-        })
-    }
-
     function onDelete(id) {
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
     }
@@ -53,16 +46,7 @@ function App() {
                 data-theme={theme}
                 className="flex flex-col min-h-screen justify-center items-center bg-page-light dark:bg-page-dark p6"
             >
-                <div className='mb-6 '>
-                    <div className="flex items-center">
-                        <button className="relative cursor-pointer" onClick={toggleTheme}>
-                            <div
-                                className="w-14 h-7 rounded-full shadow-inner transition-colors duration-300 bg-gray-300 dark:bg-btn-dark"></div>
-                            <div className="absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 translate-x-0 dark:translate-x-7"></div>
-                        </button>
-                        <span className="ml-3 text-gray-700 dark:text-gray-300 font-medium">{theme === 'light' ? 'Светлая' : 'Тёмная'}</span>
-                    </div>
-                </div>
+                <ToggleTheme theme={theme} setTheme={setTheme}/>
                 <div className="mx-auto flex flex-col gap-3">
                     <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white md-8">
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-600">To Do app</span>
