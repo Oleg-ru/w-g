@@ -7,22 +7,34 @@ import {getInitialTheme} from "./helpers/getInitialTheme.js";
 
 
 function App() {
-    const initialTodos = [
-        {id: 1, text: 'Погладить Пушка'},
-        {id: 2, text: 'Поиграть с Пушком'},
-        {id: 3, text: 'Пройти модуль по Tailwind'},
-    ];
-    const [todos, setTodos] = useState(initialTodos);
+    const [todos, setTodos] = useState([]);
     const [theme, setTheme] = useState(getInitialTheme());
+    
+    function toggleComplete(id) {
+        const todoToUpdate = todos.find(todo => todo.id === id);
 
-    function onDelete(id) {
-        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
+        if (!todoToUpdate) return;
+        const updatedTodo = {
+            ...todoToUpdate,
+            completed: !todoToUpdate.completed
+        };
+
+        const updatedTodos = todos.map(todo => todo.id === id ? updatedTodo : todo);
+        setTodos(updatedTodos);
     }
 
-    function onAdd(text) {
+    function onDelete(id) {
+        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+    }
+
+    function onAdd(text, deadline) {
         const newTodo = {
             id: crypto.randomUUID(),
             text,
+            completed: false,
+            createdAt: new Date().toISOString(),
+            deadline: deadline || null,
+            order: todos.length + 1,
         };
         setTodos([...todos, newTodo]);
     }
@@ -44,6 +56,7 @@ function App() {
                             <TodoItem
                                 key={todo.id}
                                 onDelete={onDelete}
+                                onToggleComplete={toggleComplete}
                                 {...todo}
                             />
                         )}
