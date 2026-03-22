@@ -4,6 +4,7 @@ import TodoItem from "./components/TodoItem/TodoItem.jsx";
 import AddTodo from "./components/AddTodo/AddTodo.jsx";
 import ToggleTheme from "./components/ToggleTheme/ToggleTheme.jsx";
 import {getInitialTheme} from "./helpers/getInitialTheme.js";
+import DeleteConfirmModal from "./components/DeleteConfirmModal/DeleteConfirmModal.jsx";
 
 const LOCAL_STORAGE_KEY = 'todos';
 const API_URL = 'https://69bfd62572ca04f3bcb9bc14.mockapi.io/api/v1/todos';
@@ -11,6 +12,7 @@ const API_URL = 'https://69bfd62572ca04f3bcb9bc14.mockapi.io/api/v1/todos';
 function App() {
     const [todos, setTodos] = useState([]);
     const [theme, setTheme] = useState(getInitialTheme());
+    const [deletingId, setDeletingId] = useState(null);
 
     useEffect(() => {
         const loadInitialData = async () => {
@@ -29,7 +31,7 @@ function App() {
         };
         loadInitialData();
     }, []);
-    
+
     const toggleComplete = async (id) => {
         const todoToUpdate = todos.find(todo => todo.id === id);
 
@@ -38,7 +40,7 @@ function App() {
             ...todoToUpdate,
             completed: !todoToUpdate.completed
         };
-        
+
         const updatedTodos = todos.map(todo => todo.id === id ? updatedTodo : todo);
         setTodos(updatedTodos);
         try {
@@ -56,7 +58,7 @@ function App() {
         }
     }
 
-    const onDelete = async (id) => {
+    const handleDelete = async (id) => {
         const prevTodos = todos;
         const updatedTodos = todos.filter(todo => todo.id !== id);
         setTodos(updatedTodos);
@@ -119,13 +121,22 @@ function App() {
                         {todos.map((todo) =>
                             <TodoItem
                                 key={todo.id}
-                                onDelete={onDelete}
+                                onDelete={() => setDeletingId(todo.id)}
                                 onToggleComplete={toggleComplete}
                                 {...todo}
                             />
                         )}
                     </div>
                 </div>
+                {deletingId && <DeleteConfirmModal
+                    onCancel={() => {
+                        setDeletingId(null)
+                    }}
+                    onConfirm={() => {
+                        handleDelete(deletingId);
+                        setDeletingId(null);
+                    }}
+                />}
             </div>
         </>
     )
