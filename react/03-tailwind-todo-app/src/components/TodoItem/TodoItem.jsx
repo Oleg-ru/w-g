@@ -1,20 +1,38 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
-function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, createdAt}) {
+function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, createdAt, onUpdate}) {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(text);
     const [editDeadline, setEditDeadline] = useState(deadline || "");
+    const editFormRef = useRef(null);
 
     function handleToggle() {
         onToggleComplete(id)
     }
 
-    const handleSave = () => {
+    const handleSave = useCallback(() => {
         if (editText.trim()) {
-            //save server
+            onUpdate(id, editText, editDeadline)
         }
         setIsEditing(false);
-    };
+    }, [editText, editDeadline, id, onUpdate]);
+
+    useEffect(() => {
+
+        const handleClickOutside = (e) => {
+            if (editFormRef.current && !editFormRef.current.contains(e.target)) {
+                handleSave();
+            }
+        };
+
+        if (isEditing) {
+            document.addEventListener('click', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, [isEditing, handleSave]);
 
     return (
         <div
@@ -29,7 +47,7 @@ function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, cr
                 ></button>
                 {isEditing
                     ? (
-                        <div className="flex flex-col w-full gap-2 items-stretch">
+                        <div className="flex flex-col w-full gap-2 items-stretch" ref={editFormRef}>
                             <input className="w-full px-2 py-1 border-2 border-blue-500 rounded text-sm text-gray-700 dark:text-gray-300"
                                    type="text"
                                    value={editText}
