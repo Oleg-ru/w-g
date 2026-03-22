@@ -20,7 +20,7 @@ function App() {
         loadInitialData();
     }, []);
     
-    function toggleComplete(id) {
+    const toggleComplete = async (id) => {
         const todoToUpdate = todos.find(todo => todo.id === id);
 
         if (!todoToUpdate) return;
@@ -31,6 +31,18 @@ function App() {
         
         const updatedTodos = todos.map(todo => todo.id === id ? updatedTodo : todo);
         setTodos(updatedTodos);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+        try {
+            await fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTodo),
+            })
+        } catch (e) {
+            console.error('Ошибка Обновления: ', e)
+        }
     }
 
     const onDelete = async (id) => {
