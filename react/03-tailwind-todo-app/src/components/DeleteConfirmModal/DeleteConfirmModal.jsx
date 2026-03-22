@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DeleteConfirmModal({onCancel, onConfirm}) {
+function DeleteConfirmModal({onCancel, onConfirm, message}) {
     return (
         <>
             <div className="fixed inset-0">
@@ -8,7 +8,7 @@ function DeleteConfirmModal({onCancel, onConfirm}) {
                 <div className="relative flex h-full items-center justify-center p-4 z-5">
                     <div className="p-6 rounded-lg shadow-xl max-w-md w-full mx-4 bg-white text-gray-800 dark:bg-gray-800 dark:text-white">
                         <h3 className="text-xl font-bold md-4">Подтверждение удаления</h3>
-                        <p className="mb-6">Вы уверены что хотите удалить эту задачу?</p>
+                        <p className="mb-6">{message}</p>
                         <div className="flex justify-end gap-3">
                             <button onClick={onCancel} className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-800 transition-colors cursor-pointer">
                                 Отмена
