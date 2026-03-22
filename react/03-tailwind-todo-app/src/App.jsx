@@ -16,6 +16,16 @@ function App() {
         const loadInitialData = async () => {
             const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
             setTodos(savedTodos);
+            try {
+                const response = await fetch(API_URL);
+                if (response.ok) {
+                    const serverTodos = await response.json();
+                    setTodos(serverTodos);
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(serverTodos));
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки данных с сервера: ', e)
+            }
         };
         loadInitialData();
     }, []);
