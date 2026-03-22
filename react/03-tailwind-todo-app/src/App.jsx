@@ -31,7 +31,6 @@ function App() {
         
         const updatedTodos = todos.map(todo => todo.id === id ? updatedTodo : todo);
         setTodos(updatedTodos);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
         try {
             await fetch(`${API_URL}/${id}`, {
                 method: 'PUT',
@@ -39,29 +38,34 @@ function App() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(updatedTodo),
-            })
+            });
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
         } catch (e) {
-            console.error('Ошибка Обновления: ', e)
+            console.error('Ошибка Обновления: ', e);
+            setTodos(todos)
         }
     }
 
     const onDelete = async (id) => {
+        const prevTodos = todos;
         const updatedTodos = todos.filter(todo => todo.id !== id);
         setTodos(updatedTodos);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+
 
         try {
             await fetch(`${API_URL}/${id}`, {
                 method: 'DELETE'
-            })
+            });
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
         } catch (e) {
-            console.error('Ошибка удаления: ', e)
+            console.error('Ошибка удаления: ', e);
+            setTodos(prevTodos);
         }
     }
 
     const onAdd = async (text, deadline) => {
         const newTodo = {
-            id: crypto.randomUUID(),
+            id: `temp_${crypto.randomUUID()}`,
             text,
             completed: false,
             createdAt: new Date().toISOString(),
@@ -70,7 +74,6 @@ function App() {
         };
         const updatedTodos = [...todos, newTodo];
         setTodos(updatedTodos);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
 
         try {
             const response = await fetch(API_URL, {
@@ -85,7 +88,8 @@ function App() {
             setTodos(syncedTodos);
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(syncedTodos));
         } catch (e) {
-            console.error('Ошибка добавления: ', e)
+            console.error('Ошибка добавления: ', e);
+            setTodos(todos);
         }
     }
 
