@@ -35,7 +35,7 @@ function AddTodo({onAdd}) {
             {showDeadlineInput && (
                 <div className=" mt-3 flex items-center gap-2">
                     <input
-                        className="p-2 border rounded flex-1 text-gray-500"
+                        className="p-2 border border-blue-700 rounded flex-1 text-gray-500"
                         type="datetime-local"
                         value={deadline}
                         onChange={(event) => {
@@ -43,7 +43,7 @@ function AddTodo({onAdd}) {
                         }}
                     />
                     <button
-                        className="p-2 hover:text-gray-600"
+                        className="p-2 hover:text-gray-600 cursor-pointer"
                         type="button"
                         onClick={() => {
                             setDeadline("");
