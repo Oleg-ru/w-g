@@ -1,6 +1,5 @@
 import './App.css'
-import { useState} from "react";
-import TodoItem from "./components/TodoItem/TodoItem.jsx";
+import {useState} from "react";
 import AddTodo from "./components/AddTodo/AddTodo.jsx";
 import ToggleTheme from "./components/ToggleTheme/ToggleTheme.jsx";
 import {getInitialTheme} from "./helpers/getInitialTheme.js";
@@ -36,7 +35,7 @@ function App() {
             >
                 <ToggleTheme theme={theme} setTheme={setTheme}/>
                 <div className="mx-auto flex flex-col gap-3">
-                    <Header />
+                    <Header/>
                     <AddTodo onAdd={onAdd}/>
                     <TodoList todos={todos}
                               setDeletingId={setDeletingId}
@@ -61,9 +60,9 @@ function App() {
                     }}
                     onConfirm={confirmDeleteCompleted}
                 />}
-                {hasCompletedTodos && (
-                    <DeleteCompletedButton handeDeleteCompleted={handeDeleteCompleted}/>
-                )}
+                <DeleteCompletedButton onClick={handeDeleteCompleted}
+                                       hasCompletedTodos={hasCompletedTodos}
+                />
             </div>
         </>
     )
