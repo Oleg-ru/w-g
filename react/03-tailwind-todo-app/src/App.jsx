@@ -38,7 +38,8 @@ function App() {
                              setDeletingId={setDeletingId}
                              onAdd={onAdd}
                 />
-                {deletingId && <DeleteConfirmModal
+                <DeleteConfirmModal
+                    deletingId={deletingId}
                     message="Вы уверены что хотите удалить эту задачу?"
                     onCancel={() => {
                         setDeletingId(null)
@@ -47,14 +48,15 @@ function App() {
                         handleDelete(deletingId);
                         setDeletingId(null);
                     }}
-                />}
-                {isDeletingCompleted && <DeleteConfirmModal
+                />
+                <DeleteConfirmModal
+                    isDeletingCompleted={isDeletingCompleted}
                     message={`Вы уверены что хотите удалить все выполненные задачи ${(todos.filter(todo => todo.completed) || []).length}?`}
                     onCancel={() => {
                         setIsDeletingCompleted(false);
                     }}
                     onConfirm={confirmDeleteCompleted}
-                />}
+                />
                 <DeleteCompletedButton onClick={handeDeleteCompleted}
                                        hasCompletedTodos={hasCompletedTodos}
                 />

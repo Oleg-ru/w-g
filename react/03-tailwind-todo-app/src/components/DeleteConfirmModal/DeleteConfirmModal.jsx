@@ -1,6 +1,10 @@
 import React from 'react';
 
-function DeleteConfirmModal({onCancel, onConfirm, message}) {
+function DeleteConfirmModal({onCancel, onConfirm, message, deletingId, isDeletingCompleted}) {
+    const showModal = deletingId || isDeletingCompleted;
+
+    if (!showModal) return null;
+
     return (
         <>
             <div className="fixed inset-0">
