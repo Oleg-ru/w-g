@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import CheckboxButton from "../CheckboxButton/CheckboxButton.jsx";
 import TodoEditForm from "../TodoEditForm/TodoEditForm.jsx";
 import TodoTextDisplay from "../TodoTextDisplay/TodoTextDisplay.jsx";
+import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 
 function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, createdAt, onUpdate}) {
     const [isEditing, setIsEditing] = useState(false);
@@ -62,11 +63,7 @@ function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, cr
                     )}
 
             </div>
-            <button className={"cursor-pointer"} onClick={() => {
-                onDelete(id)
-            }}>
-                🗑
-            </button>
+            <DeleteButton onDelete={onDelete} id={id}/>
         </div>
     );
 }
