@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import CheckboxButton from "../CheckboxButton/CheckboxButton.jsx";
 
 function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, createdAt, onUpdate}) {
     const [isEditing, setIsEditing] = useState(false);
@@ -38,13 +39,7 @@ function TodoItem({id, text, onDelete, onToggleComplete, completed, deadline, cr
         <div
             className="flex items-center justify-between p-4 bg-white dark:bg-page-dark rounded-lg shadow-sm hover:shadow-md transform-shadow duration-300 border border-gray-100">
             <div className="flex items-center gap-5">
-                <button
-                    onClick={handleToggle}
-                    className={`rounded-full border-2 p-3 cursor-pointer ${
-                        completed
-                            ? "border-green-500 bg-green-500"
-                            : "border-gray-300 hover:border-gray-400"} transition-colors duration-300 `}
-                ></button>
+                <CheckboxButton handleToggle={handleToggle} completed={completed}/>
                 {isEditing
                     ? (
                         <div className="flex flex-col w-full gap-2 items-stretch" ref={editFormRef}>
