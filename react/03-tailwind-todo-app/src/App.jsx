@@ -6,6 +6,7 @@ import ToggleTheme from "./components/ToggleTheme/ToggleTheme.jsx";
 import {getInitialTheme} from "./helpers/getInitialTheme.js";
 import DeleteConfirmModal from "./components/DeleteConfirmModal/DeleteConfirmModal.jsx";
 import {useTodoManagement} from "./Hooks/useTodoManagement.js";
+import Header from "./components/Header/Header.jsx";
 
 function App() {
     const [theme, setTheme] = useState(getInitialTheme());
@@ -33,9 +34,7 @@ function App() {
             >
                 <ToggleTheme theme={theme} setTheme={setTheme}/>
                 <div className="mx-auto flex flex-col gap-3">
-                    <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white md-8">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-600">To Do app</span>
-                    </h1>
+                    <Header />
                     <AddTodo onAdd={onAdd}/>
                     <div className="flex flex-col gap-3">
                         {todos.map((todo) =>
