@@ -159,7 +159,7 @@ export function useTodoManagement() {
             setTodos(originalTodos.filter(todo => !todo.completed || failedIds.includes(todo.id)))
         }
 
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(originalTodos.filter(todo => !todo.completed || failedIds.includes(todo.id))));
         setIsDeletingCompleted(false)
     };
 
