@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-
-const LOCAL_STORAGE_KEY = 'todos';
-const API_URL = 'https://69bfd62572ca04f3bcb9bc14.mockapi.io/api/v1/todos';
+import {API_URL, LOCAL_STORAGE_KEY} from "../constants/todos.js";
+import {sortedSavedTodos} from "../helpers/todoHelpers.js";
+import {loadFromLocalStorage} from "../helpers/storage.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -10,15 +10,15 @@ export function useTodoManagement() {
 
     useEffect(() => {
         const loadInitialData = async () => {
-            const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-            const sortedSavedTodos = [...savedTodos].sort((a,b) => a.order - b.order);
-            setTodos(sortedSavedTodos);
+            const savedTodos = sortedSavedTodos(loadFromLocalStorage());
+
+            setTodos(savedTodos);
             try {
                 const response = await fetch(API_URL);
                 if (response.ok) {
                     const serverTodos = await response.json();
-                    const sortedServerTodos = [...serverTodos].sort((a,b) => a.order - b.order);
-                    setTodos(sortedServerTodos);
+
+                    setTodos(sortedSavedTodos(serverTodos));
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(serverTodos));
                 }
             } catch (e) {
