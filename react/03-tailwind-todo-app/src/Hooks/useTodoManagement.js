@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {API_URL, LOCAL_STORAGE_KEY} from "../constants/todos.js";
 import {sortedSavedTodos} from "../helpers/todoHelpers.js";
-import {loadFromLocalStorage} from "../helpers/storage.js";
+import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -17,9 +17,9 @@ export function useTodoManagement() {
                 const response = await fetch(API_URL);
                 if (response.ok) {
                     const serverTodos = await response.json();
-
-                    setTodos(sortedSavedTodos(serverTodos));
-                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(serverTodos));
+                    const sortedServerTodos = sortedSavedTodos(serverTodos);
+                    setTodos(sortedServerTodos);
+                    saveToLocaleStorage(sortedServerTodos);
                 }
             } catch (e) {
                 console.error('Ошибка загрузки данных с сервера: ', e)
@@ -51,7 +51,7 @@ export function useTodoManagement() {
             const createdTodo = await response.json();
             const syncedTodos = updatedTodos.map(todo => todo.id === newTodo.id ? createdTodo : todo);
             setTodos(syncedTodos);
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(syncedTodos));
+            saveToLocaleStorage(syncedTodos)
         } catch (e) {
             console.error('Ошибка добавления: ', e);
             setTodos(todos);
@@ -79,7 +79,7 @@ export function useTodoManagement() {
                 },
                 body: JSON.stringify(updatedTodo),
             });
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+            saveToLocaleStorage(updatedTodos)
         } catch (e) {
             console.error('Ошибка Обновления: ', e);
             setTodos(todos);
@@ -106,7 +106,7 @@ export function useTodoManagement() {
                 },
                 body: JSON.stringify(updatedTodo),
             });
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+            saveToLocaleStorage(updatedTodos);
         } catch (e) {
             console.error('Ошибка Обновления: ', e);
             setTodos(todos)
@@ -123,7 +123,7 @@ export function useTodoManagement() {
             await fetch(`${API_URL}/${id}`, {
                 method: 'DELETE'
             });
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+            saveToLocaleStorage(updatedTodos)
         } catch (e) {
             console.error('Ошибка удаления: ', e);
             setTodos(prevTodos);
@@ -161,7 +161,7 @@ export function useTodoManagement() {
             setTodos(originalTodos.filter(todo => !todo.completed || failedIds.includes(todo.id)))
         }
 
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(originalTodos.filter(todo => !todo.completed || failedIds.includes(todo.id))));
+        saveToLocaleStorage(originalTodos.filter(todo => !todo.completed || failedIds.includes(todo.id)))
         setIsDeletingCompleted(false)
     };
 
@@ -189,7 +189,7 @@ export function useTodoManagement() {
                 // Можно добавить откат или повторную попытку
               }
             }
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+            saveToLocaleStorage(updatedTodos)
         } catch (e) {
             console.error('Ошибка изменения порядка: ', e);
             setTodos(todos);
