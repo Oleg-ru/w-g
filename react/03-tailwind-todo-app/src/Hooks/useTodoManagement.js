@@ -11,12 +11,14 @@ export function useTodoManagement() {
     useEffect(() => {
         const loadInitialData = async () => {
             const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-            setTodos(savedTodos);
+            const sortedSavedTodos = [...savedTodos].sort((a,b) => a.order - b.order);
+            setTodos(sortedSavedTodos);
             try {
                 const response = await fetch(API_URL);
                 if (response.ok) {
                     const serverTodos = await response.json();
-                    setTodos(serverTodos);
+                    const sortedServerTodos = [...serverTodos].sort((a,b) => a.order - b.order);
+                    setTodos(sortedServerTodos);
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(serverTodos));
                 }
             } catch (e) {
@@ -163,6 +165,37 @@ export function useTodoManagement() {
         setIsDeletingCompleted(false)
     };
 
+    const onReorder = async (activeId, overId) => {
+        try {
+            const newTodos = [...todos];
+            const [movedTodo] = newTodos.splice(activeId, 1);
+            newTodos.splice(overId, 0, movedTodo);
+            const updatedTodos = newTodos.map((todo, index) => ({
+                ...todo,
+                order: index + 1
+            }));
+            setTodos(updatedTodos);
+            console.log('Обновленный массив: ', updatedTodos)
+
+            for (const todo of updatedTodos) {
+              try {
+                await fetch(`${API_URL}/${todo.id}`, {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ order: todo.order }),
+                });
+              } catch (error) {
+                console.error(`Ошибка обновления задачи ${todo.id}:`, error);
+                // Можно добавить откат или повторную попытку
+              }
+            }
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+        } catch (e) {
+            console.error('Ошибка изменения порядка: ', e);
+            setTodos(todos);
+        }
+    };
+
     return {
         todos,
         deletingId,
@@ -175,6 +208,8 @@ export function useTodoManagement() {
         handleDelete,
         hasCompletedTodos,
         handeDeleteCompleted,
-        confirmDeleteCompleted
+        confirmDeleteCompleted,
+        setTodos,
+        onReorder
     }
 }

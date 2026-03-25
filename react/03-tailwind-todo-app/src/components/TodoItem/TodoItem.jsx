@@ -11,7 +11,7 @@ function TodoItem({id, index, text, onDelete, onToggleComplete, completed, deadl
     const [editDeadline, setEditDeadline] = useState(deadline || "");
     const editFormRef = useRef(null);
 
-    const {handleRef, ref, isDropTarget} = useSortable({id, index});
+    const {handleRef, ref} = useSortable({id, index});
 
     function handleToggle() {
         onToggleComplete(id)
@@ -25,7 +25,6 @@ function TodoItem({id, index, text, onDelete, onToggleComplete, completed, deadl
     }, [editText, editDeadline, id, onUpdate]);
 
     useEffect(() => {
-
         const handleClickOutside = (e) => {
             if (editFormRef.current && !editFormRef.current.contains(e.target)) {
                 handleSave();
@@ -44,7 +43,7 @@ function TodoItem({id, index, text, onDelete, onToggleComplete, completed, deadl
         <div
             ref={ref}
             className="flex items-center justify-between p-4 bg-white dark:bg-page-dark rounded-lg shadow-sm hover:shadow-md transform-shadow duration-300 border border-gray-100">
-            <div  ref={handleRef}
+            <div ref={handleRef}
                  className="h-6 w-4 border-l-6 border-r-6 border-gray-300 border-dotted mx-0.5 cursor-grab active:cursor-grabbing"
                  onMouseDown={(e) => e.stopPropagation()}
             >

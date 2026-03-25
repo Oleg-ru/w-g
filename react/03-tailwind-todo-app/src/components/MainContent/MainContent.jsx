@@ -4,7 +4,7 @@ import AddTodo from "../AddTodo/AddTodo.jsx";
 import Header from "../Header/Header.jsx";
 import TodoFilter from "../TodoFilter/TodoFilter.jsx";
 
-function MainContent({onAdd, todos, setDeletingId, toggleComplete, handleUpdate}) {
+function MainContent({onAdd, todos, setDeletingId, toggleComplete, handleUpdate, setTodos, onReorder}) {
 
     const [filter, setFilter] = useState('all');
 
@@ -27,6 +27,8 @@ function MainContent({onAdd, todos, setDeletingId, toggleComplete, handleUpdate}
                       setDeletingId={setDeletingId}
                       toggleComplete={toggleComplete}
                       handleUpdate={handleUpdate}
+                      setTodos={setTodos}
+                      onReorder={onReorder}
             />
         </div>
     );

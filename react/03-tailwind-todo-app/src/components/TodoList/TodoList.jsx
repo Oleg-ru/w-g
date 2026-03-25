@@ -2,20 +2,24 @@ import React from 'react';
 import TodoItem from "../TodoItem/TodoItem.jsx";
 import {DragDropProvider} from "@dnd-kit/react";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
-import {Debug} from '@dnd-kit/dom/plugins/debug';
+import {isSortable} from "@dnd-kit/dom/sortable";
 
-function TodoList({todos, setDeletingId, toggleComplete, handleUpdate}) {
+function TodoList({todos, setDeletingId, toggleComplete, handleUpdate, onReorder}) {
 
     function handleDragEnd(event) {
-        console.log(event)
-        const {operation: {source, target}} = event;
-        if (event.operation.target) {
-            console.log(`Dropped ${source.id} onto ${target.id}`);
+        const {source} = event.operation;
+
+        if (isSortable(source)) {
+            const {initialIndex, index} = source;
+
+            if (initialIndex !== index) {
+                onReorder(initialIndex, index)
+            }
         }
     }
 
     return (
-        <DragDropProvider onDragEnd={handleDragEnd} modifiers={[RestrictToVerticalAxis]} plugins={[Debug]}>
+        <DragDropProvider onDragEnd={handleDragEnd} modifiers={[RestrictToVerticalAxis]}>
             <div className="flex flex-col gap-3">
                 {todos.map((todo, index) => <TodoItem
                         key={todo.id}
