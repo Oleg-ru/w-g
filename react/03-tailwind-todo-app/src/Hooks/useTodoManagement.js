@@ -78,13 +78,7 @@ export function useTodoManagement() {
         const updatedTodos = todos.map(todo => todo.id === id ? updatedTodo : todo);
         setTodos(updatedTodos);
         try {
-            await fetch(`${API_URL}/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedTodo),
-            });
+            await updateTodo(id, updatedTodo);
             saveToLocaleStorage(updatedTodos);
         } catch (e) {
             console.error('Ошибка Обновления: ', e);
