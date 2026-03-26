@@ -33,3 +33,12 @@ export const updateTodo = async (id, todo) => {
         throw new Error('Failed to update todo')
     }
 }
+
+export const deleteTodo = async (id) => {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+    });
+    if (!response.ok) {
+        throw new Error('Failed to delete todo')
+    }
+}

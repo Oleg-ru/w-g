@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {API_URL} from "../constants/todos.js";
 import {createNewTodo, sortedSavedTodos} from "../helpers/todoHelpers.js";
 import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
-import {createTodo, fetchTodos, updateTodo} from "../api/todoApi.js";
+import {createTodo, deleteTodo, fetchTodos, updateTodo} from "../api/todoApi.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -93,9 +93,7 @@ export function useTodoManagement() {
 
 
         try {
-            await fetch(`${API_URL}/${id}`, {
-                method: 'DELETE'
-            });
+            await deleteTodo(id);
             saveToLocaleStorage(updatedTodos)
         } catch (e) {
             console.error('Ошибка удаления: ', e);
