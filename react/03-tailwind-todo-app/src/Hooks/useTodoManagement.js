@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {API_URL} from "../constants/todos.js";
 import {createNewTodo, sortedSavedTodos} from "../helpers/todoHelpers.js";
 import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
 import {createTodo, deleteTodo, fetchTodos, updateTodo} from "../api/todoApi.js";
@@ -119,9 +118,7 @@ export function useTodoManagement() {
 
         for (const id of completedIds) {
             try {
-                await fetch(`${API_URL}/${id}`, {
-                    method: 'DELETE'
-                });
+                await deleteTodo(id);
             } catch (e) {
                 console.error(`Ошибка удаления задачи ${id}: `, e);
                 failedIds.push(id);
@@ -150,11 +147,7 @@ export function useTodoManagement() {
 
             for (const todo of updatedTodos) {
                 try {
-                    await fetch(`${API_URL}/${todo.id}`, {
-                        method: "PUT",
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify({order: todo.order}),
-                    });
+                    await updateTodo(todo.id, {order: todo.order});
                 } catch (error) {
                     console.error(`Ошибка обновления задачи ${todo.id}:`, error);
                     // Можно добавить откат или повторную попытку
