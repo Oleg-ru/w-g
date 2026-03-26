@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
-import {API_URL, LOCAL_STORAGE_KEY} from "../constants/todos.js";
-import {sortedSavedTodos} from "../helpers/todoHelpers.js";
+import {API_URL} from "../constants/todos.js";
+import {createNewTodo, sortedSavedTodos} from "../helpers/todoHelpers.js";
 import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
+import {fetchTodos} from "../api/todoApi.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -14,13 +15,10 @@ export function useTodoManagement() {
 
             setTodos(savedTodos);
             try {
-                const response = await fetch(API_URL);
-                if (response.ok) {
-                    const serverTodos = await response.json();
-                    const sortedServerTodos = sortedSavedTodos(serverTodos);
-                    setTodos(sortedServerTodos);
-                    saveToLocaleStorage(sortedServerTodos);
-                }
+                const serverTodos = await fetchTodos();
+                const sortedServerTodos = sortedSavedTodos(serverTodos);
+                setTodos(sortedServerTodos);
+                saveToLocaleStorage(sortedServerTodos);
             } catch (e) {
                 console.error('Ошибка загрузки данных с сервера: ', e)
             }
@@ -29,14 +27,7 @@ export function useTodoManagement() {
     }, []);
 
     const onAdd = async (text, deadline) => {
-        const newTodo = {
-            id: `temp_${crypto.randomUUID()}`,
-            text,
-            completed: false,
-            createdAt: new Date().toISOString(),
-            deadline: deadline || null,
-            order: todos.length + 1,
-        };
+        const newTodo = createNewTodo(text, deadline, todos.length + 1);
         const updatedTodos = [...todos, newTodo];
         setTodos(updatedTodos);
 
@@ -178,16 +169,16 @@ export function useTodoManagement() {
             console.log('Обновленный массив: ', updatedTodos)
 
             for (const todo of updatedTodos) {
-              try {
-                await fetch(`${API_URL}/${todo.id}`, {
-                  method: "PUT",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ order: todo.order }),
-                });
-              } catch (error) {
-                console.error(`Ошибка обновления задачи ${todo.id}:`, error);
-                // Можно добавить откат или повторную попытку
-              }
+                try {
+                    await fetch(`${API_URL}/${todo.id}`, {
+                        method: "PUT",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({order: todo.order}),
+                    });
+                } catch (error) {
+                    console.error(`Ошибка обновления задачи ${todo.id}:`, error);
+                    // Можно добавить откат или повторную попытку
+                }
             }
             saveToLocaleStorage(updatedTodos)
         } catch (e) {
