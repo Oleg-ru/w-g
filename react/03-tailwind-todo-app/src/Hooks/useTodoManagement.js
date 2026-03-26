@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {API_URL} from "../constants/todos.js";
 import {createNewTodo, sortedSavedTodos} from "../helpers/todoHelpers.js";
 import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
-import {createTodo, fetchTodos} from "../api/todoApi.js";
+import {createTodo, fetchTodos, updateTodo} from "../api/todoApi.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -57,14 +57,8 @@ export function useTodoManagement() {
         setTodos(updatedTodos);
 
         try {
-            await fetch(`${API_URL}/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedTodo),
-            });
-            saveToLocaleStorage(updatedTodos)
+            await updateTodo(id, updatedTodo);
+            saveToLocaleStorage(updatedTodos);
         } catch (e) {
             console.error('Ошибка Обновления: ', e);
             setTodos(todos);

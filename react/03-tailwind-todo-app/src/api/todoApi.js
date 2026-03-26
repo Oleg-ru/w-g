@@ -20,3 +20,16 @@ export async function createTodo(todo) {
         throw new Error('Failed to create todo')
     }
 }
+
+export const updateTodo = async (id, todo) => {
+    const response =  await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todo),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to update todo')
+    }
+}
