@@ -7,3 +7,16 @@ export async function fetchTodos () {
     }
     return response.json()
 }
+
+export async function createTodo(todo) {
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todo),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to create todo')
+    }
+}

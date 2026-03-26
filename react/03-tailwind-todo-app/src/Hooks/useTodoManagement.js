@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {API_URL} from "../constants/todos.js";
 import {createNewTodo, sortedSavedTodos} from "../helpers/todoHelpers.js";
 import {loadFromLocalStorage, saveToLocaleStorage} from "../helpers/storage.js";
-import {fetchTodos} from "../api/todoApi.js";
+import {createTodo, fetchTodos} from "../api/todoApi.js";
 
 export function useTodoManagement() {
     const [todos, setTodos] = useState([]);
@@ -32,13 +32,7 @@ export function useTodoManagement() {
         setTodos(updatedTodos);
 
         try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newTodo),
-            });
+            const response = await createTodo(newTodo);
             const createdTodo = await response.json();
             const syncedTodos = updatedTodos.map(todo => todo.id === newTodo.id ? createdTodo : todo);
             setTodos(syncedTodos);
