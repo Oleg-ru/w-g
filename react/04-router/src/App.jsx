@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegPage from "./pages/RegPage.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 export const AppRoutes = {
   HOME: "/",
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <>
+      <NavBar />
       <Routes>
         <Route path={AppRoutes.HOME} element={<HomePage />}/>
         <Route path={AppRoutes.ABOUT} element={<AboutPage />}/>
