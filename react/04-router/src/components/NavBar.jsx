@@ -15,7 +15,7 @@ const StyledLink = styled(Link)`
 
 function NavBar(props) {
     return (
-        <nav>
+        <nav style={{backgroundColor: 'yellowgreen', padding: "0.5rem"}}>
             <StyledLink to={"/"}>Главная</StyledLink>
             <StyledLink to={"/about"}>О нас</StyledLink>
             <StyledLink to={"/auth"}>Войти</StyledLink>
