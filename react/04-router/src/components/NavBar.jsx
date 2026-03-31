@@ -14,7 +14,7 @@ const StyledLink = styled(Link)`
 `;
 
 function NavBar(props) {
-    const isAuth = false;
+    const isAuth = true;
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -23,9 +23,6 @@ function NavBar(props) {
             navigate('/auth');
         }
     }, [isAuth, location.pathname, navigate]);
-
-
-    console.log(location)
     
     return (
         <nav style={{backgroundColor: 'yellowgreen', padding: "0.5rem"}}>
