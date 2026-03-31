@@ -7,6 +7,8 @@ function DashboardPage() {
     const [name, setName] = useState('');
     const [windowWith, setWindowWith] = useState(0);
 
+    console.log('DashboardPage - клиентский компонент')
+
     useEffect(() => {
 
         setWindowWith(window.innerWidth);

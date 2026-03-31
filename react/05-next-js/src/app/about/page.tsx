@@ -1,11 +1,18 @@
+'use client'
+
 import Button from "@/components/Button";
 import Link from "next/link";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 function Page() {
     console.log('Мы создаем серверный компонент')
 
-    const lastUpdated = new Date().toISOString();
+    const [lastUpdated, setLastUpdated] = useState('')
+
+    useEffect(() => {
+        setLastUpdated(new Date().toISOString())
+    }, []);
+    //const lastUpdated = new Date().toISOString();
 
     return (
         <div className="p-8">
