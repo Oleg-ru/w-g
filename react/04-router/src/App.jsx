@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegPage from "./pages/RegPage.jsx";
 import NavBar from "./components/NavBar.jsx";
 import NavbarNavlink from "./components/NavbarNavlink.jsx";
+import NavControls from "./components/NavControls.jsx";
 
 export const AppRoutes = {
   HOME: "/",
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <NavbarNavlink />
+      <NavControls />
       <Routes>
         <Route path={AppRoutes.HOME} element={<HomePage />}/>
         <Route path={AppRoutes.ABOUT} element={<AboutPage />}/>
