@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
-import {Link} from "react-router";
+import {Link, useLocation, useNavigate} from "react-router";
 
 const StyledLink = styled(Link)`
     color: blue;
@@ -14,6 +14,19 @@ const StyledLink = styled(Link)`
 `;
 
 function NavBar(props) {
+    const isAuth = false;
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuth && location.pathname.startsWith("/about")) {
+            navigate('/auth');
+        }
+    }, [isAuth, location.pathname, navigate]);
+
+
+    console.log(location)
+    
     return (
         <nav style={{backgroundColor: 'yellowgreen', padding: "0.5rem"}}>
             <StyledLink to={"/"}>Главная</StyledLink>
