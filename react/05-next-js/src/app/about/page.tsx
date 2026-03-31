@@ -1,4 +1,6 @@
 import Button from "@/components/Button";
+import Link from "next/link";
+import React from "react";
 
 function Page() {
     console.log('Мы создаем серверный компонент')
@@ -13,6 +15,7 @@ function Page() {
                 <p>Последнее обновление: {lastUpdated}</p>
                 <Button />
             </div>
+            <Link className="text-fuchsia-500" href="/">На главную</Link>
         </div>
     );
 }

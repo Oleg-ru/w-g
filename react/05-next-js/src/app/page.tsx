@@ -1,17 +1,12 @@
-"use client"
-import {useState} from "react";
+import Link from "next/link";
 
 export default function Home() {
-    const [counter, setCounter] = useState(0)
   return (
     <div>
       Мое первое приложенице на Next.js
         <div>
-            <h1>Приложения для счетчика:</h1>
-            <h2>Значение счетчика: {counter}</h2>
-            <button className="bg-amber-700 p-1 cursor-pointer rounded active:bg-amber-300 delay-10 active:text-cyan-950"
-                onClick={() => {setCounter(prev => prev + 1)}}
-            >Счетчик + 1</button>
+            <Link className="text-blue-400" href="/about" >О нас</Link>
+            <Link className="text-green-400" href="/dashboard" >Панель управления</Link>
         </div>
     </div>
   );

@@ -1,5 +1,6 @@
 'use client'
 import React, {useEffect, useState} from 'react';
+import Link from "next/link";
 
 function DashboardPage() {
 
@@ -33,6 +34,7 @@ function DashboardPage() {
                     <p>Ширина окна: {windowWith}px</p>
                 </div>
             </div>
+            <Link className="text-fuchsia-500" href="/">На главную</Link>
         </div>
     );
 }
