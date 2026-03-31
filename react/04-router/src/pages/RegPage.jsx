@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from "react-router";
-import {AppRoutes} from "../App.jsx";
 
 function RegPage(props) {
     return (
@@ -12,7 +11,7 @@ function RegPage(props) {
                 <button>Войти</button>
             </form>
             <p>Уже есть аккаунт?</p>
-            <Link to={`${AppRoutes.AUTH}/${AppRoutes.LOGIN}`}>Войти</Link>
+            <Link to={`auth/login`}>Войти</Link>
         </div>
     );
 }

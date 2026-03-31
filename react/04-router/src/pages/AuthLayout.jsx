@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router";
+import {Link, Outlet} from "react-router";
 
 function AuthLayout(props) {
     return (
@@ -9,6 +9,7 @@ function AuthLayout(props) {
                 <Link to={"login"}>Вход</Link>
                 <Link to={"register"}>Регистрация</Link>
             </div>
+            <Outlet/>
         </div>
     );
 }

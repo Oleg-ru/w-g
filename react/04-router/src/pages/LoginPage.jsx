@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router";
-import {AppRoutes} from "../App.jsx";
 
 function LoginPage(props) {
 
@@ -37,7 +36,7 @@ function LoginPage(props) {
                 <button type="submit">Войти</button>
             </form>
             <p>Нет аккаунта?</p>
-            <Link to={`${AppRoutes.AUTH}/${AppRoutes.REG}`}>Зарегистрироваться</Link>
+            <Link to={`auth/registration`}>Зарегистрироваться</Link>
         </div>
     );
 }
