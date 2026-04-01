@@ -1,4 +1,5 @@
 import React from "react";
+import CommentSelector from "@/app/posts/[postId]/comments/_components/CommentSelector";
 
 export default async function CommentPage(
     {params}: { params: Promise<{ postId: string, commentId: string }> }
@@ -13,6 +14,7 @@ export default async function CommentPage(
             <h3 className="text-fuchsia-300">Пост id: {comment.postId}</h3>
             <h3 className="text-blue-400">Ответил: {comment.name}</h3>
             <p className="text-cyan-200">Комментарий: {comment.body}</p>
+            <CommentSelector />
         </div>
     );
 }
