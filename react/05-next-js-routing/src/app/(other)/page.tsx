@@ -12,7 +12,7 @@ export default function Home() {
                     <li className={liClass}><Link href="/docs">Get started</Link></li>
                     <li className={liClass}><Link href="/docs/react">React</Link></li>
                     <li className={liClass}><Link href="/docs/react/hooks">React Hooks</Link></li>
-                    <li className={liClass}><Link href="/docs/react/hooks/useState">useState</Link></li>
+                    <li className={liClass}><Link href="/docs/react/hooks/useState" replace>useState</Link></li>
                 </ul>
             </nav>
         </>
