@@ -1,4 +1,8 @@
-import {notFound} from "next/dist/client/components/not-found";
+//import {notFound} from "next/dist/client/components/not-found";
+
+function getRandomInt(count: number) {
+    return Math.floor(Math.random() * count)
+}
 
 export default async function ProductReview(
     {params}: { params: Promise<{ productId: string, reviewId: string }> }
@@ -6,7 +10,13 @@ export default async function ProductReview(
     const {productId, reviewId} = await params;
 
     if (+reviewId > 1000) {
-        notFound()
+        //notFound()
+    }
+
+    const random = getRandomInt(2);
+
+    if (random === 1) {
+        throw new Error('Ошибка загрузки ответа (фэйк)')
     }
 
     return (

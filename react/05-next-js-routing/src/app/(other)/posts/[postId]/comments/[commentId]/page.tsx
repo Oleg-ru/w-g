@@ -1,5 +1,5 @@
 import React from "react";
-import CommentSelector from "@/app/posts/[postId]/comments/_components/CommentSelector";
+import CommentSelector from "@/app/(other)/posts/[postId]/comments/_components/CommentSelector";
 
 export default async function CommentPage(
     {params}: { params: Promise<{ postId: string, commentId: string }> }
