@@ -1,10 +1,19 @@
-import {type NextRequest} from 'next/server';
+// import {type NextRequest} from 'next/server';
+//
+// export async function GET(request: NextRequest) {
+//
+//     const requestHeaders = new Headers(request.headers);
+//     console.log(requestHeaders.get('Authorization'));
+//
+//
+//     return new Response('📡-Route. From API in profile');
+// }
 
-export async function GET(request: NextRequest) {
+import {headers} from "next/headers";
 
-    const requestHeaders = new Headers(request.headers);
-    console.log(requestHeaders.get('Authorization'));
+export async function GET() {
+    const headerList = await headers();
+    console.log(headerList.get('Authorization'));
 
-
-    return new Response('📡-Route. From API in profile');
+    return new Response('📡-Route. Headers');
 }
