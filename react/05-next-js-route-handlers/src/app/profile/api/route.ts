@@ -15,5 +15,9 @@ export async function GET() {
     const headerList = await headers();
     console.log(headerList.get('Authorization'));
 
-    return new Response('📡-Route. Headers');
+    return new Response('<h1>📡-Route. Headers</h1>', {
+        headers: {
+            "Content-Type": "text/html; charset=UTF-8"
+        }
+    });
 }
