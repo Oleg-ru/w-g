@@ -1,4 +1,5 @@
 import Link from "next/dist/client/link";
+export const dynamic = 'force-dynamic';
 
 function Page() {
     return (

@@ -1,4 +1,11 @@
-function Page() {
+import {cookies} from "next/headers";
+
+async function Page() {
+
+    const cookiesStore = await cookies();
+    const theme = cookiesStore.get('theme');
+    console.log(theme)
+    
     return (
         <div>
             <h2>О компании</h2>
