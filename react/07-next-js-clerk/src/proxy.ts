@@ -11,8 +11,10 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 //Защита всех маршрутов по умолчанию, а перечисляем к каким не нужна
 const isPublicRoute = createRouteMatcher(['/', '/signin(.*)', '/signup(.*)',]);
 export default clerkMiddleware(async (auth, req) => {
-    if (!isPublicRoute(req)) {
-        await auth.protect()
+
+    const {userId, redirectToSignIn} = await auth();
+    if (!userId && !isPublicRoute(req)) {
+        return redirectToSignIn;
     }
 });
 
