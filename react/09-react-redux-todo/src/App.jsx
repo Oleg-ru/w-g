@@ -1,10 +1,50 @@
 import './App.css'
+import {useState} from "react";
 
 function App() {
 
-  return (
-    <div className="text-2xl">
+  const [text, setText] = useState('')
+  const [todos, setTodos] = useState([]);
 
+  const handleInput = (newText) => {
+    setText(newText);
+  };
+  const addTodo = () => {
+    if (text.trim()) {
+      setTodos([...todos, {
+        id: Date.now(),
+        text: text,
+        completed: false,
+      }]);
+      setText('')
+    }
+  };
+
+  const toggleCompleted = (id) => {
+    setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : {...todo}))
+  };
+
+  return (
+    <div className="border p-4">
+      <label>
+        <input type="text"
+               className="border border-blue-500 p-2"
+               value={text}
+               onChange={(e) => handleInput(e.target.value)}
+        />
+        <button onClick={addTodo}>Добавить задачу</button>
+      </label>
+      <ul>
+        {todos.map(todo => <li key={todo.id}>
+          <input type="checkbox"
+                 checked={todo.completed}
+                 onChange={() => toggleCompleted(todo.id)}
+          />
+          <span className={`${todo.completed ? 'line-through' : ''}`}>
+            {todo.text}
+          </span>
+        </li>)}
+      </ul>
     </div>
   )
 }
