@@ -24,6 +24,10 @@ function App() {
     setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : {...todo}))
   };
 
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  };
+
   return (
     <div className="border p-4">
       <label>
@@ -43,6 +47,7 @@ function App() {
           <span className={`${todo.completed ? 'line-through' : ''}`}>
             {todo.text}
           </span>
+          <button onClick={() => {deleteTodo(todo.id)}}>❌</button>
         </li>)}
       </ul>
     </div>
