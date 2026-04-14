@@ -1,5 +1,7 @@
 import './App.css'
 import {useState} from "react";
+import TodoList from "./assets/component/TodoList.jsx";
+import InputTask from "./assets/component/InputTask.jsx";
 
 function App() {
 
@@ -30,26 +32,8 @@ function App() {
 
   return (
     <div className="border p-4">
-      <label>
-        <input type="text"
-               className="border border-blue-500 p-2"
-               value={text}
-               onChange={(e) => handleInput(e.target.value)}
-        />
-        <button onClick={addTodo}>Добавить задачу</button>
-      </label>
-      <ul>
-        {todos.map(todo => <li key={todo.id}>
-          <input type="checkbox"
-                 checked={todo.completed}
-                 onChange={() => toggleCompleted(todo.id)}
-          />
-          <span className={`${todo.completed ? 'line-through' : ''}`}>
-            {todo.text}
-          </span>
-          <button onClick={() => {deleteTodo(todo.id)}}>❌</button>
-        </li>)}
-      </ul>
+      <InputTask handleInput={handleInput} addTodo={addTodo} text={text}/>
+      <TodoList todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo}/>
     </div>
   )
 }
