@@ -57,8 +57,8 @@ export const fetchData
 },
     {
         condition: (_, {getState}) => {
-            const {user, isLoading} = getState().data;
-            if (!user || isLoading) return false
+            const {user, isLoading, posts} = getState().data;
+            if (!user || isLoading || posts.length) return false
             return true;
         }
     }
