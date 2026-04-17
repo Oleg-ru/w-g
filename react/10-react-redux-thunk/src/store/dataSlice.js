@@ -4,6 +4,7 @@ const initialState = {
     posts: [],
     isLoading: false,
     error: null,
+    user: true,
 };
 
 const dataSlice = createSlice({
@@ -53,6 +54,14 @@ export const fetchData
         })
     }
 
-});
+},
+    {
+        condition: (_, {getState}) => {
+            const {user, isLoading} = getState().data;
+            if (!user || isLoading) return false
+            return true;
+        }
+    }
+);
 
 export const dataReducer = dataSlice.reducer;

@@ -45,7 +45,7 @@ function App() {
                 {error.status === 0 && ""}
                 {error.status === "NETWORK_ERROR" && <p>Нет подключения</p>}
             </div>}
-            {showPosts && <ul>
+            {showPosts && posts && <ul>
                 {
                     posts.map(post => (
                         <li key={post.id} className="border p-2 m-1 rounded list-none flex flex-col items-start">
