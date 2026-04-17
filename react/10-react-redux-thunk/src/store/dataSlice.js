@@ -29,16 +29,30 @@ const dataSlice = createSlice({
             fetchData.rejected,
             (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message;
+                state.error = action.payload;
             }
         )
     }
 });
 
 export const fetchData
-    = createAsyncThunk('allData/fetchData', async (url, {signal}) => {
-    const response = await fetch(url, {signal});
-    return await response.json();
+    = createAsyncThunk('allData/fetchData', async (url, {signal, rejectWithValue}) => {
+    try {
+        const response = await fetch(url, {signal});
+        if (!response.ok) {
+            return rejectWithValue({
+                message: `Ошибка: ${response.status}`,
+                status: response.status
+            })
+        }
+        return await response.json();
+    } catch (error) {
+        return rejectWithValue({
+            message: error.name === 'AbortError' ? 'Запрос отменен' : 'Ошибка подключения',
+            status: error.name === 'AbortError' ? 0 : 'NETWORK_ERROR',
+        })
+    }
+
 });
 
 export const dataReducer = dataSlice.reducer;

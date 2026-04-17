@@ -40,7 +40,11 @@ function App() {
             {isLoading && (
                 <button onClick={handleCancelFetch}>Отменить запрос</button>
             )}
-            {error && <p className='border border-b-orange-500 text-red-500 p-2 rounded'>Ошибка: {error}</p>}
+            {error && <div className='border border-b-orange-500 text-red-500 p-2 rounded'>
+                {error.status === 404 && <p>Данные не найдены</p>}
+                {error.status === 0 && ""}
+                {error.status === "NETWORK_ERROR" && <p>Нет подключения</p>}
+            </div>}
             {showPosts && <ul>
                 {
                     posts.map(post => (
