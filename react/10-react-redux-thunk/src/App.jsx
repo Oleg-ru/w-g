@@ -1,20 +1,27 @@
 import './App.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fetchData} from "./store/dataSlice.js";
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 function App() {
     const [showPosts, setShowPosts] = useState(false)
-
     const {posts, isLoading, error} = useSelector(state => state.data);
+
+    const fetchPromise = useRef(null);
 
     const dispatch = useDispatch();
     const fetchPosts = () => {
-        dispatch(fetchData())
+        fetchPromise.current = dispatch(fetchData('https://jsonplaceholder.typicode.com/posts'));
     };
     const handleShowPosts = () => {
         if (posts.length > 0) {
             setShowPosts(true)
+        }
+    };
+
+    const handleCancelFetch = () => {
+        if (fetchPromise.current) {
+            fetchPromise.current.abort()
         }
     };
 
@@ -30,11 +37,14 @@ function App() {
                     onClick={handleShowPosts}>
                 Показать posts
             </button>
+            {isLoading && (
+                <button onClick={handleCancelFetch}>Отменить запрос</button>
+            )}
             {error && <p className='border border-b-orange-500 text-red-500 p-2 rounded'>Ошибка: {error}</p>}
             {showPosts && <ul>
                 {
                     posts.map(post => (
-                        <li className="border p-2 m-1 rounded list-none flex flex-col items-start">
+                        <li key={post.id} className="border p-2 m-1 rounded list-none flex flex-col items-start">
                             <div className="p-1">Id поста: {post.id}</div>
                             <div className="p-1">Заголовок поста: {post.title}</div>
                             <div className="p-1">Текст поста: {post.body}</div>

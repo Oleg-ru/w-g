@@ -36,8 +36,8 @@ const dataSlice = createSlice({
 });
 
 export const fetchData
-    = createAsyncThunk('allData/fetchData', async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    = createAsyncThunk('allData/fetchData', async (url, {signal}) => {
+    const response = await fetch(url, {signal});
     return await response.json();
 });
 
