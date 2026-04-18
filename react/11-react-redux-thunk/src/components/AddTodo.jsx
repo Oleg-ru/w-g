@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
+import {useDispatch} from "react-redux";
+import {addTodo} from "../store/actions.js";
 
 function AddTodo(props) {
-    const [text, setText] = useState('')
+    const [text, setText] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (text.trim()) {
-            //logic
+            dispatch(addTodo(text));
             setText('');
         }
     };
