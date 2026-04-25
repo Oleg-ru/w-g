@@ -1,12 +1,11 @@
 import Slider from "@/components/slider/Slider";
-import ProductCard from "@/components/ProductCard";
 import Actions from "@/components/Actions";
 import NewProducts from "@/components/NewProducts";
 import Purchases from "@/components/Purchases";
 import SpecialOffers from "@/components/SpecialOffers";
 import Maps from "@/components/Maps";
 import Articles from "@/components/Articles";
-import Footer from "@/components/Footer";
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
