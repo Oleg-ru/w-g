@@ -1,13 +1,10 @@
 import {NextResponse} from "next/server";
 import {getDB} from "../../../../../utils/api-routes";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 3600;
-
 export async function GET() {
     try {
         const db = await getDB();
-        const user = await db.collection('user').findOne({});
+        const user = await db.collection('users').findOne({});
         if (!user?.purchases?.length) {
             return NextResponse.json([])
         }
