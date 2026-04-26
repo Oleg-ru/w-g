@@ -13,7 +13,7 @@ const fetchPurchases = async () => {
         const purchases: ProductCardProps[] = await res.json();
         return purchases;
     } catch (error) {
-        console.error('Ошибка в компоненте Actions', error);
+        console.error('Ошибка при получении покупок', error);
         throw error;
     }
 };

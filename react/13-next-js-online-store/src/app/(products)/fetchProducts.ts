@@ -15,7 +15,7 @@ const fetchProductsByCategory = async (category: string) => {
 
         return shuffleArray(products);
     } catch (error) {
-        console.error('Ошибка в компоненте Actions', error);
+        console.error('Ошибка при получении продуктов', error);
         throw error;
     }
 };
