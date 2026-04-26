@@ -2,6 +2,10 @@ import {ProductCardProps} from "@/types/product";
 import fetchProductsByCategory from "@/app/(products)/fetchProducts";
 import ProductSection from "@/app/(products)/ProductSection";
 
+export const metadata = {
+    title: 'Акции магазина "Северяночка"',
+    description: 'Акционные товары магазина "Северяночка"',
+};
 
 const AllActions = async () => {
 
