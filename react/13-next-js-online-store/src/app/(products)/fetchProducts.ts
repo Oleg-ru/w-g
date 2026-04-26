@@ -11,9 +11,11 @@ const fetchProductsByCategory = async (category: string) => {
             }
         );
         if (!res.ok) throw new Error(`Ошибка получения продуктов ${category}`);
-        const products: ProductCardProps[] = await res.json();
 
-        return shuffleArray(products);
+        const products: ProductCardProps[] = await res.json();
+        const availableProducts = products.filter(product => product.quantity > 0);
+
+        return shuffleArray(availableProducts);
     } catch (error) {
         console.error('Ошибка при получении продуктов', error);
         throw error;
