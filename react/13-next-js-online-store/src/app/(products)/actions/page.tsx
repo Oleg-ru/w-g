@@ -1,27 +1,24 @@
-import {ProductCardProps} from "@/types/product";
 import fetchProductsByCategory from "@/app/(products)/fetchProducts";
-import ProductSection from "@/app/(products)/ProductSection";
+import GenericProductListPage from "@/app/(products)/GenericProductListPage";
 
 export const metadata = {
     title: 'Акции магазина "Северяночка"',
     description: 'Акционные товары магазина "Северяночка"',
 };
 
-const AllActions = async () => {
+const AllActions
+    = async ({searchParams}: { searchParams: Promise<{ page?: string, itemsPage?: string }> }) => {
 
-    let products: ProductCardProps[] = [];
-
-    try {
-        products = await fetchProductsByCategory('actions');
-        return (
-            <ProductSection title="Все акции"
-                            viewAllButton={{text: "На главную", href: "/"}}
-                            products={products}
-            />
-        )
-    } catch {
-        return <div className="text-red-500">Ошибка: не удалось загрузить все акции</div>
-    }
+    return (
+        <GenericProductListPage searchParams={searchParams}
+                                props={{
+                                    fetchData: () => fetchProductsByCategory('actions'),
+                                    pageTitle: "Все акции",
+                                    basePath: "/actions",
+                                    errorMessage: "Ошибка: не удалось загрузить акции"
+                                }}
+        />
+    )
 };
 
 export default AllActions;
