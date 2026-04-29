@@ -1,8 +1,9 @@
-import {GenericProductPageProps} from "@/types/GenericProductPageProps";
+import {GenericProductPageProps} from "@/types/genericProductPageProps";
 import ProductSection from "@/app/(products)/ProductSection";
 import {CONFIG} from "../../../config/config";
+import PaginationWrapper from "@/components/PaginationWrapper";
 
-const GenericProductListPage
+const GenericProductsListPage
     = async ({searchParams, props}: {
     searchParams: Promise<{ page?: string, itemsPerPage?: string }>,
     props: GenericProductPageProps
@@ -25,6 +26,11 @@ const GenericProductListPage
                                 viewAllButton={{text: 'На главную', href: "/"}}
                                 products={paginatedProducts}
                 />
+                {products.length > perPage &&
+                    <PaginationWrapper totalItems={products.length}
+                                       currentPage={currentPage}
+                                       basePath={props.basePath}
+                    />}
             </>
         );
     } catch {
@@ -36,4 +42,4 @@ const GenericProductListPage
 
 }
 
-export default GenericProductListPage;
+export default GenericProductsListPage;
