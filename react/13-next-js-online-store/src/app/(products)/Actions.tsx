@@ -1,6 +1,7 @@
 import {ProductCardProps} from "@/types/product";
 import fetchProductsByCategory from "@/app/(products)/fetchProducts";
 import ProductSection from "@/app/(products)/ProductSection";
+import {shuffleArray} from "../../../utils/shuffleArray";
 
 const Actions = async () => {
 
@@ -8,6 +9,7 @@ const Actions = async () => {
 
     try {
         products = await fetchProductsByCategory('actions');
+        products = shuffleArray(products);
         return (
             <ProductSection title="Акции"
                             viewAllButton={{text: "Все акции", href: "/actions"}}

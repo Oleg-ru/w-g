@@ -1,4 +1,3 @@
-import {shuffleArray} from "../../../utils/shuffleArray";
 import {ProductCardProps} from "@/types/product";
 
 const fetchProductsByCategory = async (category: string) => {
@@ -13,9 +12,8 @@ const fetchProductsByCategory = async (category: string) => {
         if (!res.ok) throw new Error(`Ошибка получения продуктов ${category}`);
 
         const products: ProductCardProps[] = await res.json();
-        const availableProducts = products.filter(product => product.quantity > 0);
 
-        return shuffleArray(availableProducts);
+        return products.filter(product => product.quantity > 0);
     } catch (error) {
         console.error('Ошибка при получении продуктов', error);
         throw error;
