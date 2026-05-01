@@ -18,7 +18,8 @@ function Pagination({totalItems, currentPage, basePath, itemsPerPage, searchQuer
     const buttonBase = "px-4 py-2 rounded duration-300";
     const buttonActive = "bg-[#ff6633] text-white hover:bg-[#70c05b]";
     const buttonDisabled = "opacity-50 cursor-not-allowed";
-    
+
+
     return (
         <div className="flex justify-center gap-4 mt-8 mb-12">
             <Link href={createPageUrl(basePath, params, 1)}
