@@ -50,6 +50,7 @@ function Pagination({totalItems, currentPage, basePath, itemsPerPage, searchQuer
             >
                 В конец
             </Link>
+
         </div>
     );
 }
