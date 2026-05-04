@@ -35,6 +35,7 @@ function Pagination({totalItems, currentPage, basePath, itemsPerPage, searchQuer
                   className={`${buttonBase} ${currentPage === 1 ? buttonDisabled : buttonActive}`}
             >
                 Назад
+
             </Link>
             <Link href={createPageUrl(basePath, params, currentPage + 1)}
                   onClick={(e) => {if (currentPage === totalPages) e.preventDefault()}}
