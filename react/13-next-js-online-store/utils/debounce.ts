@@ -4,5 +4,4 @@ export function debounce<F extends (...args: unknown[]) => unknown>(fn: F, delay
         window.clearTimeout(timeoutId);
         timeoutId = window.setTimeout(() => fn(...args), delay);
     }
-
 }
