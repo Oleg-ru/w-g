@@ -7,8 +7,6 @@ function example () {
     console.log("from example" + y);
 }
 
-
-
 example()
 
 console.log(y);
