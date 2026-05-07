@@ -8,5 +8,4 @@ function example () {
 }
 
 example()
-
 console.log(y);
