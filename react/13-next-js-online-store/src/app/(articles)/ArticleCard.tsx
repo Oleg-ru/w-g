@@ -1,7 +1,7 @@
 import Image from "next/image";
-import {Article} from "@/types/articles";
+import {ArticleCardProps} from "@/types/articlesListPageProps";
 
-function ArticleCard({article}: {article: Article}) {
+function ArticleCard({article}: {article: ArticleCardProps}) {
     return (
         <article className="bg-white h-full flex flex-col rounded overflow-hidden shadow-(--shadow-card) hover:shadow-(--shadow-article) duration-300">
             <div className="relative h-48 w-full">
@@ -14,7 +14,7 @@ function ArticleCard({article}: {article: Article}) {
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
             </div>
-            <div className="p-2.5 flex-1 flex flex-col gap-y-2.5 leading-[1.5]">
+            <div className="p-2.5 flex-1 flex flex-col gap-y-2.5 leading-normal">
                 <time className="text-[8px] text-[#8f8f8f]">
                     {new Date(article.createdAt).toLocaleDateString("ru-RU")}
                 </time>
