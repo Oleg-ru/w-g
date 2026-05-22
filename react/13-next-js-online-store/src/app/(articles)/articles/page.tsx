@@ -21,4 +21,5 @@ const AllArticles = async () => {
     }
 };
 
+
 export default AllArticles;
