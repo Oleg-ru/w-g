@@ -27,4 +27,8 @@ body {
   background-color: #FBF8EC;
   color: var(--foreground);
   font-family: var(--font-rubik), serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

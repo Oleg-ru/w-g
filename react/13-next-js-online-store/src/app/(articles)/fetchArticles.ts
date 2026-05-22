@@ -1,4 +1,4 @@
-import {Article} from "@/types/articles";
+import {ArticleCardProps} from "@/types/articlesListPageProps";
 
 const fetchArticles = async () => {
     try {
@@ -11,7 +11,7 @@ const fetchArticles = async () => {
         );
         if (!res.ok) throw new Error(`Ошибка получения статей`);
 
-        const articles: Article[] = await res.json();
+        const articles: ArticleCardProps[] = await res.json();
         return articles;
     } catch (error) {
         console.error('Ошибка при получении статей', error);

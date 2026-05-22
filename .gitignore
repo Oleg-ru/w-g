@@ -42,3 +42,5 @@ coverage/
 # OS
 .DS_Store
 Thumbs.db
+/react/13-next-js-online-store/env.production
+/react/13-next-js-online-store/env
