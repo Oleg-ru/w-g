@@ -51,6 +51,7 @@ function addItem(cart: Cart, product: Product, quantity: number): Cart {
         return cart;
     }
 
+    //@ts-ignore
     const existProduct = cart.items.find((item) => item.product.id === product.id);
 
     if (existProduct) {
