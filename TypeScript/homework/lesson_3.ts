@@ -133,3 +133,12 @@ function checkout(cart: CartState): CartState {
         deliveryAddress: 'ул. Ленина 100'
     }
 }
+
+function getData() {
+    return {
+        age: 13,
+        data: {
+            valueApp: "aze-12"
+        }
+    }
+}
