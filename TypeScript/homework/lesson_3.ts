@@ -142,3 +142,26 @@ function getData() {
         }
     }
 }
+
+// Вычисление числа Фибоначчи (рекурсивный подход)
+function fibonacci(n: number): number {
+    if (n < 0) {
+        throw new Error('Число не может быть отрицательным');
+    }
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Вычисление массива чисел Фибоначчи до n-го элемента
+function fibonacciSequence(n: number): number[] {
+    if (n < 0) {
+        throw new Error('Число не может быть отрицательным');
+    }
+    const sequence: number[] = [];
+    for (let i = 0; i <= n; i++) {
+        sequence.push(fibonacci(i));
+    }
+    return sequence;
+}
