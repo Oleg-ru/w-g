@@ -154,6 +154,17 @@ function fibonacci(n: number): number {
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
+// Вычисление факториала
+function factorial(n: number): number {
+    if (n < 0) {
+        throw new Error('Число не может быть отрицательным');
+    }
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
 // Вычисление массива чисел Фибоначчи до n-го элемента
 function fibonacciSequence(n: number): number[] {
     if (n < 0) {
